@@ -2,7 +2,7 @@
 export default {
   firstName: 'Keverson',
   lastName: 'Souza',
-  role: 'Desenvolvedor Web',
+  role: 'Desenvolvedor de Sistemas',
   photo: 'profile.jpg',
   photoHover: 'pen.jpg', // exibida ao passar o mouse sobre a lateral
 

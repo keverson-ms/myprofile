@@ -1,10 +1,13 @@
 <script setup>
-// Nome e cargo. compact: versão sobre fundo escuro (topo da lateral no celular/tablet)
+// Nome e cargo.
+// compact: versão sobre fundo escuro (topo da lateral no celular/tablet)
+// condensed: versão reduzida do cabeçalho fixo, usada enquanto o conteúdo está rolado
 defineProps({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   role: { type: String, default: '' },
   compact: { type: Boolean, default: false },
+  condensed: { type: Boolean, default: false },
 })
 </script>
 
@@ -18,17 +21,35 @@ defineProps({
     <p class="mt-2 text-xs font-semibold tracking-[0.3em] text-white/80 uppercase">{{ role }}</p>
   </header>
 
-  <header v-else class="text-center">
-    <h1 class="text-5xl leading-none font-extrabold tracking-wide uppercase xl:text-6xl">
+  <!-- Fixo no topo do <main> ao rolar. O fundo se estende até as bordas do <main>
+       (sombra larga + clip-path) para o conteúdo passar por baixo sem aparecer nas laterais. -->
+  <header
+    v-else
+    class="sticky top-0 z-10 bg-paper text-center shadow-[0_0_0_100vmax_var(--color-paper)] transition-[padding] duration-300 ease-out [clip-path:inset(0_-100vmax)] print:static"
+    :class="condensed ? 'border-b border-fg/10 py-3' : 'border-b border-transparent py-0'"
+  >
+    <h1
+      class="leading-none font-extrabold tracking-wide uppercase transition-[font-size] duration-300 ease-out"
+      :class="condensed ? 'text-3xl' : 'text-5xl xl:text-6xl'"
+    >
       <span class="text-gold">{{ firstName }}</span>
       {{ ' ' }}
       <span class="text-fg">{{ lastName }}</span>
     </h1>
-    <div class="my-4 flex items-center">
+    <!-- Linha decorativa: some na versão reduzida (deixa só nome + cargo, sem colidir com o seletor de paleta) -->
+    <div
+      class="flex items-center overflow-hidden transition-[margin,max-height,opacity] duration-300 ease-out"
+      :class="condensed ? 'my-1.5 max-h-0 opacity-0' : 'my-4 max-h-4 opacity-100'"
+    >
       <span class="size-2.5 rounded-full bg-fg" />
       <span class="h-0.5 flex-1 bg-fg" />
       <span class="size-2.5 rounded-full bg-fg" />
     </div>
-    <p class="text-base font-semibold tracking-[0.35em] uppercase">{{ role }}</p>
+    <p
+      class="font-semibold uppercase transition-[font-size,letter-spacing] duration-300 ease-out"
+      :class="condensed ? 'text-xs tracking-[0.3em]' : 'text-base tracking-[0.35em]'"
+    >
+      {{ role }}
+    </p>
   </header>
 </template>

@@ -1,5 +1,10 @@
 <script setup>
+import { ref } from 'vue'
 import resume from './data/resume.js'
+import UnderConstruction from './components/ui/UnderConstruction.vue'
+
+// Aviso "Em construção" (fechável). Mude para false para não exibir.
+const showUnderConstruction = ref(true)
 
 import PrintButton from './components/ui/PrintButton.vue'
 import ThemePicker from './components/ui/ThemePicker.vue'
@@ -24,6 +29,8 @@ import EducationSection from './components/sections/EducationSection.vue'
   <div
     class="relative flex min-h-screen flex-col bg-paper font-sans text-fg lg:h-screen lg:flex-row lg:overflow-hidden print:h-auto print:overflow-visible"
   >
+    <UnderConstruction v-if="showUnderConstruction" @close="showUnderConstruction = false" />
+
     <PrintButton />
     <ThemePicker class="fixed top-4 right-4 z-50 print:hidden" />
     <SidebarToggle />
@@ -35,9 +42,10 @@ import EducationSection from './components/sections/EducationSection.vue'
       <InterestsCard :items="resume.passions" />
     </AppSidebar>
 
-    <AppMain>
+    <AppMain v-slot="{ scrolled }">
       <ResumeHeader
         class="mb-16 hidden lg:block"
+        :condensed="scrolled"
         :first-name="resume.firstName"
         :last-name="resume.lastName"
         :role="resume.role"
