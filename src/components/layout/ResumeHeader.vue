@@ -25,7 +25,7 @@ defineProps({
        (sombra larga + clip-path) para o conteúdo passar por baixo sem aparecer nas laterais. -->
   <header
     v-else
-    class="sticky top-0 z-10 bg-paper text-center shadow-[0_0_0_100vmax_var(--color-paper)] transition-[padding] duration-300 ease-out [clip-path:inset(0_-100vmax)] print:static"
+    class="sticky top-0 z-10 bg-paper/85 text-center shadow-[0_0_0_100vmax_color-mix(in_srgb,var(--color-paper)_85%,transparent)] backdrop-blur-md transition-[padding] duration-300 ease-out [clip-path:inset(0_-100vmax)] print:static"
     :class="condensed ? 'border-b border-fg/10 py-3' : 'border-b border-transparent py-0'"
   >
     <h1

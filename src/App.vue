@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import resume from './data/resume.js'
 import UnderConstruction from './components/ui/UnderConstruction.vue'
+import StarryBackground from './components/ui/StarryBackground.vue'
 
 // Aviso "Em construção" (fechável). Mude para false para não exibir.
 const showUnderConstruction = ref(true)
@@ -29,6 +30,9 @@ import EducationSection from './components/sections/EducationSection.vue'
   <div
     class="relative flex min-h-screen flex-col bg-paper font-sans text-fg lg:h-screen lg:flex-row lg:overflow-hidden print:h-auto print:overflow-visible"
   >
+    <!-- Céu estrelado (modo escuro), atrás de todo o conteúdo -->
+    <StarryBackground />
+
     <UnderConstruction v-if="showUnderConstruction" @close="showUnderConstruction = false" />
 
     <PrintButton />

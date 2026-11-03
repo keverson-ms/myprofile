@@ -113,8 +113,12 @@ const stars = [
           <!-- Braço apontando -->
           <path d="M124 248 L148 226" stroke="#2c2c2c" stroke-width="13" stroke-linecap="round" />
           <path d="M148 226 L165 200" stroke="#e8b796" stroke-width="9" stroke-linecap="round" />
-          <circle cx="167" cy="196" r="6.5" fill="#e8b796" />
-          <path d="M168 194 L177 181" stroke="#e8b796" stroke-width="4" stroke-linecap="round" />
+          <!-- Mão aberta (palma e quatro dedos estendidos + polegar), acenando para o foguete -->
+          <g fill="none" stroke="#e8b796" stroke-linecap="round">
+            <path d="M163.5 189 L162.5 180.5 M167 188 L167 178.5 M170.5 188.5 L171.5 179.5 M173.5 190.5 L175.5 183" stroke-width="3.2" />
+            <path d="M161 196 L155.5 191" stroke-width="3.4" />
+          </g>
+          <ellipse cx="167.5" cy="194" rx="6.5" ry="7" fill="#e8b796" />
           <!-- Pescoço -->
           <path d="M75 240 V214 H97 V240 Z" fill="#dca988" />
 
