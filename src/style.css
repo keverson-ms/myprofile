@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Raleway", ui-sans-serif, system-ui, sans-serif;
+  /* ink: superfícies escuras (lateral, ícones, etiquetas) | fg: textos e linhas sobre o fundo claro */
+  --color-ink: #3d3d3d;
+  --color-ink-dark: #2b2b2b;
+  --color-paper: #f1f1f1;
+  --color-gold: #b39a6b;
+  --color-fg: var(--color-ink);
+}
+
+/* Rolagem sem barra visível (usada nos cartões da lateral) */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Paletas alternativas — a padrão (Clássico) é a definida no @theme acima.
+   Mantenha os nomes em sincronia com src/composables/useTheme.js */
+:root[data-theme="navy"] {
+  --color-ink: #1f3a5f;
+  --color-ink-dark: #132a46;
+  --color-paper: #f2f5f9;
+  --color-gold: #d1a54a;
+}
+
+:root[data-theme="emerald"] {
+  --color-ink: #2d4a42;
+  --color-ink-dark: #1d332d;
+  --color-paper: #f2f5f2;
+  --color-gold: #c4875a;
+}
+
+/* Modo escuro: fundo do conteúdo e da lateral pretos, textos claros.
+   Combina com qualquer paleta (mantém o destaque e um leve tom da cor da paleta). */
+:root[data-mode="dark"] {
+  color-scheme: dark;
+  --color-ink: #000000;
+  --color-ink-dark: #2a2a2a;
+  --color-paper: #161616;
+  --color-fg: #e7e7e7;
+}
+
+:root[data-mode="dark"][data-theme="navy"] {
+  --color-ink: #050a12;
+  --color-ink-dark: #1e2b40;
+  --color-paper: #111a27;
+}
+
+:root[data-mode="dark"][data-theme="emerald"] {
+  --color-ink: #040b09;
+  --color-ink-dark: #1c2e28;
+  --color-paper: #101b17;
+}
+
+/* Transição suave ao trocar de paleta */
+.theme-transition,
+.theme-transition * {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, fill 0.4s ease,
+    stroke 0.4s ease !important;
+}
+
+@media print {
+  @page { size: A4; margin: 0; }
+  [vw] { display: none !important; } /* VLibras */
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

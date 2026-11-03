@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keverson Souza — Currículo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Aplica a paleta e o modo salvos antes da renderização (evita piscar a cor padrão) -->
+    <script>
+      try {
+        var t = localStorage.getItem('myprofile-theme')
+        if (t === 'navy' || t === 'emerald') document.documentElement.setAttribute('data-theme', t)
+        if (localStorage.getItem('myprofile-mode') === 'dark') document.documentElement.setAttribute('data-mode', 'dark')
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+
+    <!-- VLibras (tradução para Libras) — fica fora do app Vue, como recomenda a documentação oficial -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      try {
+        new window.VLibras.Widget('https://vlibras.gov.br/app')
+      } catch (e) {
+        /* serviço indisponível: a página funciona normalmente sem o widget */
+      }
+    </script>
+  </body>
+</html>
