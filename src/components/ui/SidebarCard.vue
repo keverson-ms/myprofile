@@ -18,7 +18,7 @@ defineProps({
       </span>
     </div>
     <!-- Corpo claro -->
-    <div class="-mt-3 flex-1 rounded-r-3xl bg-paper px-6 pt-6 pb-4 text-fg sm:rounded-3xl lg:rounded-l-none">
+    <div class="-mt-3 flex-1 rounded-r-3xl bg-paper px-6 pt-6 pb-4 text-fg shadow-lg shadow-black/40 sm:rounded-3xl lg:rounded-l-none">
       <slot />
     </div>
   </section>

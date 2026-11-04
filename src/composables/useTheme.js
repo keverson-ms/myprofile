@@ -2,7 +2,8 @@ import { ref } from 'vue'
 
 // Mantenha em sincronia com src/style.css e com o script inline do index.html
 export const STORAGE_KEY = 'myprofile-theme'
-export const MODE_STORAGE_KEY = 'myprofile-mode'
+// Chave renomeada quando o padrão virou o modo escuro: escolhas antigas de "claro" são descartadas
+export const MODE_STORAGE_KEY = 'myprofile-color-mode'
 
 export const themes = [
   { id: 'classic', label: 'Clássico', ink: '#3d3d3d', accent: '#b39a6b' },
@@ -52,7 +53,8 @@ function withTransition(fn) {
 // Estado compartilhado por todos os componentes
 const storedTheme = read(STORAGE_KEY)
 const current = ref(isValid(storedTheme) ? storedTheme : DEFAULT)
-const dark = ref(read(MODE_STORAGE_KEY) === 'dark')
+// Padrão: modo escuro. Só fica claro se a pessoa escolheu o claro antes.
+const dark = ref(read(MODE_STORAGE_KEY) !== 'light')
 applyTheme(current.value)
 applyMode(dark.value)
 
@@ -62,7 +64,7 @@ window.addEventListener('storage', (e) => {
     current.value = isValid(e.newValue) ? e.newValue : DEFAULT
     applyTheme(current.value)
   } else if (e.key === MODE_STORAGE_KEY) {
-    dark.value = e.newValue === 'dark'
+    dark.value = e.newValue !== 'light'
     applyMode(dark.value)
   }
 })

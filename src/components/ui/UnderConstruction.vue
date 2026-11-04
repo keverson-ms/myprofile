@@ -63,7 +63,7 @@ const stars = [
         <!-- Céu -->
         <rect width="320" height="280" class="fill-ink" />
         <circle v-for="(s, i) in stars" :key="i" :cx="s[0]" :cy="s[1]" :r="s[2]" fill="#fff" class="uc-star" :style="{ animationDelay: `${i * 0.37}s` }" />
-        <circle cx="270" cy="40" r="15" class="fill-paper" opacity="0.9" />
+        <circle cx="270" cy="40" r="15" fill="#ececec" opacity="0.9" />
         <circle cx="264" cy="36" r="3" class="fill-ink" opacity="0.12" />
         <circle cx="275" cy="46" r="2" class="fill-ink" opacity="0.12" />
 

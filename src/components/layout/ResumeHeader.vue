@@ -1,5 +1,8 @@
 <script setup>
-// Nome e cargo.
+import { ref } from 'vue'
+import TypedName from './TypedName.vue'
+
+// Nome (com efeito de digitação) e cargo.
 // compact: versão sobre fundo escuro (topo da lateral no celular/tablet)
 // condensed: versão reduzida do cabeçalho fixo, usada enquanto o conteúdo está rolado
 defineProps({
@@ -9,16 +12,23 @@ defineProps({
   compact: { type: Boolean, default: false },
   condensed: { type: Boolean, default: false },
 })
+
+// O cargo aparece (fade) quando o nome termina de ser digitado pela primeira vez
+// e continua visível nos ciclos seguintes (o nome apaga e redigita a cada 5s).
+const nameDone = ref(false)
 </script>
 
 <template>
   <header v-if="compact" class="text-center">
     <h1 class="text-3xl font-extrabold tracking-wide uppercase">
-      <span class="text-gold">{{ firstName }}</span>
-      {{ ' ' }}
-      <span class="text-white">{{ lastName }}</span>
+      <TypedName :first-name="firstName" :last-name="lastName" last-class="text-white" @done="nameDone = true" />
     </h1>
-    <p class="mt-2 text-xs font-semibold tracking-[0.3em] text-white/80 uppercase">{{ role }}</p>
+    <p
+      class="mt-2 text-xs font-semibold tracking-[0.3em] text-white/80 uppercase transition-opacity duration-700"
+      :class="nameDone ? 'opacity-100' : 'opacity-0'"
+    >
+      {{ role }}
+    </p>
   </header>
 
   <!-- Fixo no topo do <main> ao rolar. O fundo se estende até as bordas do <main>
@@ -32,9 +42,7 @@ defineProps({
       class="leading-none font-extrabold tracking-wide uppercase transition-[font-size] duration-300 ease-out"
       :class="condensed ? 'text-3xl' : 'text-5xl xl:text-6xl'"
     >
-      <span class="text-gold">{{ firstName }}</span>
-      {{ ' ' }}
-      <span class="text-fg">{{ lastName }}</span>
+      <TypedName :first-name="firstName" :last-name="lastName" last-class="text-fg" @done="nameDone = true" />
     </h1>
     <!-- Linha decorativa: some na versão reduzida (deixa só nome + cargo, sem colidir com o seletor de paleta) -->
     <div
@@ -46,8 +54,11 @@ defineProps({
       <span class="size-2.5 rounded-full bg-fg" />
     </div>
     <p
-      class="font-semibold uppercase transition-[font-size,letter-spacing] duration-300 ease-out"
-      :class="condensed ? 'text-xs tracking-[0.3em]' : 'text-base tracking-[0.35em]'"
+      class="font-semibold uppercase transition-[font-size,letter-spacing,opacity] duration-700 ease-out"
+      :class="[
+        condensed ? 'text-xs tracking-[0.3em]' : 'text-base tracking-[0.35em]',
+        nameDone ? 'opacity-100' : 'opacity-0',
+      ]"
     >
       {{ role }}
     </p>

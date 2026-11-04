@@ -27,19 +27,22 @@ const onHover = (e, value) => {
 </script>
 
 <template>
-  <!-- Desktop fechado: margem negativa empurra a lateral para fora e o conteúdo ocupa a largura toda -->
+  <!-- Desktop: 1ª coluna do grid (25%). Ao fechar, a coluna anima até 0 e o overflow-hidden
+       recorta o conteúdo, que mantém a largura de 25vw (efeito de deslizar, sem espremer). -->
   <aside
     id="sidebar"
-    class="relative shrink-0 bg-ink pb-10 transition-[margin] duration-500 ease-in-out lg:flex lg:h-screen lg:w-75 lg:flex-col lg:bg-transparent lg:pt-67 lg:pb-0 print:ml-0! print:h-auto"
-    :class="open ? 'lg:ml-0' : 'lg:-ml-75'"
+    class="relative bg-ink pb-10 lg:col-start-1 lg:h-screen lg:overflow-hidden lg:bg-transparent lg:pb-0 print:h-auto"
     :inert="!open && isDesktop ? true : undefined"
     @pointerenter="onHover($event, true)"
     @pointerleave="onHover($event, false)"
   >
+   <!-- pt-[278px] = altura da onda (SidebarWave.vue). A área rolável começa exatamente onde a onda
+        termina, então os cartões rolados são cortados ali e nunca passam por cima da onda. -->
+   <div class="relative lg:flex lg:h-full lg:w-[25vw] lg:flex-col lg:pt-[278px] print:w-auto">
     <SidebarWave />
 
     <!-- Fundo escuro da lateral abaixo da onda -->
-    <div class="absolute inset-x-0 top-67 bottom-0 hidden bg-ink lg:block" />
+    <div class="absolute inset-x-0 top-[278px] bottom-0 hidden bg-ink lg:block" />
 
     <!-- Foto (+ nome no celular/tablet) -->
     <div class="flex flex-col items-center px-6 pt-10 pb-8 lg:p-0">
@@ -64,7 +67,7 @@ const onHover = (e, value) => {
       <!-- Celular/tablet fechado: recolhe só os cartões (foto e nome continuam visíveis) -->
       <div
         ref="scroller"
-        class="relative grid gap-8 sm:grid-cols-2 sm:px-8 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col lg:overflow-y-auto lg:overscroll-contain lg:px-0 lg:pt-6 lg:pb-10 lg:scrollbar-none print:grid! print:overflow-visible"
+        class="relative grid gap-8 sm:grid-cols-2 sm:px-8 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col lg:overflow-y-auto lg:overscroll-contain lg:px-0 lg:pt-1 lg:pb-10 lg:scrollbar-none print:grid! print:overflow-visible"
         :class="{ 'max-lg:hidden': !open }"
         @scroll.passive="update"
       >
@@ -73,5 +76,6 @@ const onHover = (e, value) => {
 
       <SidebarScrollHints :up="canScrollUp" :down="canScrollDown" @scroll="scrollStep" />
     </div>
+   </div>
   </aside>
 </template>

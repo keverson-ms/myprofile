@@ -1,11 +1,15 @@
 <script setup>
 import { ref } from 'vue'
 import resume from './data/resume.js'
+import { useSidebar } from './composables/useSidebar.js'
 import UnderConstruction from './components/ui/UnderConstruction.vue'
 import StarryBackground from './components/ui/StarryBackground.vue'
 
 // Aviso "Em construção" (fechável). Mude para false para não exibir.
 const showUnderConstruction = ref(true)
+
+// Lateral aberta/fechada: controla as colunas do grid no desktop
+const { open: sidebarOpen } = useSidebar()
 
 import PrintButton from './components/ui/PrintButton.vue'
 import ThemePicker from './components/ui/ThemePicker.vue'
@@ -26,9 +30,12 @@ import EducationSection from './components/sections/EducationSection.vue'
 </script>
 
 <template>
-  <!-- Desktop: altura da tela, sem rolagem da página — só o <main> rola -->
+  <!-- Celular/tablet: coluna única (lateral em cima, conteúdo embaixo).
+       Desktop: grid de 2 colunas — lateral 25% | conteúdo 75%. Com a lateral fechada, 0% | 100%
+       (a troca de colunas é animada). Altura da tela, sem rolagem da página: só o <main> rola. -->
   <div
-    class="relative flex min-h-screen flex-col bg-paper font-sans text-fg lg:h-screen lg:flex-row lg:overflow-hidden print:h-auto print:overflow-visible"
+    class="relative flex min-h-screen flex-col bg-paper font-sans text-fg lg:grid lg:h-screen lg:overflow-hidden lg:transition-[grid-template-columns] lg:duration-500 lg:ease-in-out print:h-auto print:overflow-visible"
+    :class="sidebarOpen ? 'lg:grid-cols-[25%_75%]' : 'lg:grid-cols-[0%_100%]'"
   >
     <!-- Céu estrelado (modo escuro), atrás de todo o conteúdo -->
     <StarryBackground />

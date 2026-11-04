@@ -12,8 +12,11 @@
       try {
         var t = localStorage.getItem('myprofile-theme')
         if (t === 'navy' || t === 'emerald') document.documentElement.setAttribute('data-theme', t)
-        if (localStorage.getItem('myprofile-mode') === 'dark') document.documentElement.setAttribute('data-mode', 'dark')
-      } catch (e) {}
+        // Padrão: modo escuro (só fica claro se a pessoa escolheu o claro antes)
+        if (localStorage.getItem('myprofile-color-mode') !== 'light') document.documentElement.setAttribute('data-mode', 'dark')
+      } catch (e) {
+        document.documentElement.setAttribute('data-mode', 'dark')
+      }
     </script>
   </head>
   <body>
