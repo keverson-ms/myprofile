@@ -11,17 +11,17 @@ defineProps({
 
 <template>
   <SidebarCard title="Redes Sociais" icon="share">
-    <ul class="space-y-3">
+    <ul class="space-y-3 print:space-y-1.5">
       <li v-for="s in items" :key="s.href">
         <a
           :href="s.href"
           target="_blank"
           rel="noopener"
           :aria-label="owner ? `${s.label} de ${owner}` : s.label"
-          class="group flex items-center gap-3 text-[13px] font-medium"
+          class="group flex items-center gap-3 text-[13px] font-medium print:gap-2"
         >
           <span
-            class="grid size-7 shrink-0 place-items-center rounded-full bg-ink text-white transition group-hover:scale-110 group-hover:bg-gold"
+            class="grid size-7 shrink-0 place-items-center rounded-full bg-ink text-white transition group-hover:scale-110 group-hover:bg-gold print:size-4 print:bg-transparent print:text-fg/70"
           >
             <AppIcon :name="s.icon" class="size-4" />
           </span>

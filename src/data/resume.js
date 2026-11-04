@@ -258,4 +258,8 @@ export default {
       course: 'Ensino Superior em Ciência da Computação',
     },
   ],
+
+  // Cursos — a seção só aparece quando houver ao menos um item.
+  // { name, institution, year?, hours?, url? } (url: link do certificado, opcional)
+  courses: [],
 }

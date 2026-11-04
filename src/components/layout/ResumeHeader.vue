@@ -19,12 +19,18 @@ const nameDone = ref(false)
 </script>
 
 <template>
-  <header v-if="compact" class="text-center">
-    <h1 class="text-3xl font-extrabold tracking-wide uppercase">
-      <TypedName :first-name="firstName" :last-name="lastName" last-class="text-white" @done="nameDone = true" />
+  <!-- No PDF: alinhado à esquerda, texto escuro, nome maior e cargo sempre visível -->
+  <header v-if="compact" class="text-center print:text-left">
+    <h1 class="text-3xl font-extrabold tracking-wide uppercase print:text-4xl">
+      <TypedName
+        :first-name="firstName"
+        :last-name="lastName"
+        last-class="text-white print:text-fg"
+        @done="nameDone = true"
+      />
     </h1>
     <p
-      class="mt-2 text-xs font-semibold tracking-[0.3em] text-white/80 uppercase transition-opacity duration-700"
+      class="mt-2 text-xs font-semibold tracking-[0.3em] text-white/80 uppercase transition-opacity duration-700 print:text-sm print:text-fg/70 print:opacity-100!"
       :class="nameDone ? 'opacity-100' : 'opacity-0'"
     >
       {{ role }}

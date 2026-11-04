@@ -63,8 +63,60 @@
     stroke 0.4s ease !important;
 }
 
+/* Impressão / PDF (A4): só o essencial, fundo branco e boa distribuição entre páginas.
+   Os ajustes de layout de cada componente ficam nas classes print: dos próprios componentes. */
 @media print {
-  @page { size: A4; margin: 0; }
-  [vw] { display: none !important; } /* VLibras */
-  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page {
+    size: A4;
+    margin: 14mm 14mm 16mm;
+  }
+
+  html, body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Reduz a escala para caber mais conteúdo por página sem perder legibilidade */
+  body { zoom: 0.82; }
+
+  /* VLibras (o widget cria elementos próprios com CSS forte; o #app dá peso suficiente para vencer) */
+  #app ~ [vw],
+  #app ~ [vw] *,
+  #vlibras-access-wrapper,
+  html body [vw],
+  html body [vw] *,
+  html body [vw-access-button],
+  html body [vw-plugin-wrapper],
+  html body .vw-plugin-wrapper,
+  html body .vw-access-button {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Papel sempre no modo claro (mesmo se a impressão vier por outro caminho que não o botão) */
+  :root[data-mode="dark"] {
+    color-scheme: light;
+    --color-ink: #3d3d3d;
+    --color-ink-dark: #2b2b2b;
+    --color-paper: #f1f1f1;
+    --color-fg: var(--color-ink);
+  }
+  :root[data-mode="dark"][data-theme="navy"] {
+    --color-ink: #1f3a5f;
+    --color-ink-dark: #132a46;
+    --color-paper: #f2f5f9;
+  }
+  :root[data-mode="dark"][data-theme="emerald"] {
+    --color-ink: #2d4a42;
+    --color-ink-dark: #1d332d;
+    --color-paper: #f2f5f2;
+  }
+
+  /* Quebras de página: título nunca fica sozinho no pé da página; blocos CURTOS não são cortados.
+     Blocos longos (cada experiência inteira) podem quebrar entre páginas — senão seriam empurrados
+     inteiros para a página seguinte, deixando grandes espaços em branco. */
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+  p { orphans: 3; widows: 3; }
+  .print-keep { break-inside: avoid; page-break-inside: avoid; }
 }

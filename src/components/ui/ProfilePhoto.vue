@@ -88,7 +88,7 @@ const shineStyle = computed(() => ({
 <template>
   <div
     ref="el"
-    class="group relative size-full rounded-full bg-gold p-[7px] shadow-lg transition-[transform,box-shadow] duration-300 ease-out will-change-transform"
+    class="group relative size-full rounded-full bg-gold p-[7px] shadow-lg transition-[transform,box-shadow] duration-300 ease-out will-change-transform print:p-1 print:shadow-none! print:transform-none!"
     :class="hovered ? 'shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-gold)_35%,transparent),0_18px_40px_rgb(0_0_0/0.45)]' : ''"
     :style="frameStyle"
     @pointerenter="onEnter"
@@ -99,7 +99,7 @@ const shineStyle = computed(() => ({
       <img
         :src="src"
         :alt="alt"
-        class="size-full object-cover transition-[transform,opacity] duration-700 ease-out"
+        class="size-full object-cover transition-[transform,opacity] duration-700 ease-out print:transform-none! print:opacity-100!"
         :class="showAlt ? 'opacity-0' : 'opacity-100'"
         :style="imageStyle"
       />
@@ -109,13 +109,13 @@ const shineStyle = computed(() => ({
         :src="hoverSrc"
         alt=""
         aria-hidden="true"
-        class="absolute inset-0 size-full object-cover transition-[transform,opacity] duration-700 ease-out"
+        class="absolute inset-0 size-full object-cover transition-[transform,opacity] duration-700 ease-out print:hidden"
         :class="showAlt ? 'opacity-100' : 'opacity-0'"
         :style="imageStyle"
       />
     </div>
     <div
-      class="pointer-events-none absolute inset-[7px] rounded-full mix-blend-soft-light transition-opacity duration-300"
+      class="pointer-events-none absolute inset-[7px] rounded-full mix-blend-soft-light transition-opacity duration-300 print:hidden"
       :class="hovered ? 'opacity-100' : 'opacity-0'"
       :style="shineStyle"
     />

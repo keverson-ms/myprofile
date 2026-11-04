@@ -27,6 +27,7 @@ import InterestsCard from './components/sidebar/InterestsCard.vue'
 import ProfileSection from './components/sections/ProfileSection.vue'
 import ExperienceSection from './components/sections/ExperienceSection.vue'
 import EducationSection from './components/sections/EducationSection.vue'
+import CoursesSection from './components/sections/CoursesSection.vue'
 </script>
 
 <template>
@@ -34,7 +35,7 @@ import EducationSection from './components/sections/EducationSection.vue'
        Desktop: grid de 2 colunas — lateral 25% | conteúdo 75%. Com a lateral fechada, 0% | 100%
        (a troca de colunas é animada). Altura da tela, sem rolagem da página: só o <main> rola. -->
   <div
-    class="relative flex min-h-screen flex-col bg-paper font-sans text-fg lg:grid lg:h-screen lg:overflow-hidden lg:transition-[grid-template-columns] lg:duration-500 lg:ease-in-out print:h-auto print:overflow-visible"
+    class="relative flex min-h-screen flex-col bg-paper font-sans text-fg lg:grid lg:h-screen lg:overflow-hidden lg:transition-[grid-template-columns] lg:duration-500 lg:ease-in-out print:block! print:h-auto print:min-h-0 print:overflow-visible print:bg-white"
     :class="sidebarOpen ? 'lg:grid-cols-[25%_75%]' : 'lg:grid-cols-[0%_100%]'"
   >
     <!-- Céu estrelado (modo escuro), atrás de todo o conteúdo -->
@@ -50,7 +51,8 @@ import EducationSection from './components/sections/EducationSection.vue'
       <ContactCard :items="resume.contact" />
       <SocialCard :items="resume.social" :owner="resume.firstName" />
       <SkillsCard :skills="resume.skills" />
-      <InterestsCard :items="resume.passions" />
+      <!-- Interesses (só ícones) não entram no PDF -->
+      <InterestsCard :items="resume.passions" class="print:hidden" />
     </AppSidebar>
 
     <AppMain v-slot="{ scrolled }">
@@ -62,10 +64,12 @@ import EducationSection from './components/sections/EducationSection.vue'
         :role="resume.role"
       />
 
-      <div class="space-y-16 lg:space-y-20">
+      <div class="space-y-16 lg:space-y-20 print:space-y-9">
+
         <ProfileSection :paragraphs="resume.profile" />
         <ExperienceSection :items="resume.experience" />
         <EducationSection :items="resume.education" />
+        <CoursesSection v-if="resume.courses?.length" :items="resume.courses" />
       </div>
     </AppMain>
   </div>

@@ -24,11 +24,13 @@ watch(done, (value) => value && emit('done'), { immediate: true })
 
 <template>
   <span class="relative inline-block whitespace-nowrap" :aria-label="full">
-    <!-- Reserva o espaço do nome completo -->
-    <span class="invisible" aria-hidden="true">{{ firstName }} {{ lastName }}</span>
+    <!-- Reserva o espaço do nome completo. Na impressão, é ele que aparece (nome sempre completo). -->
+    <span class="invisible print:visible" aria-hidden="true"><span class="print:text-gold">{{ firstName }}</span> <span
+      :class="lastClass"
+    >{{ lastName }}</span></span>
 
-    <!-- Texto digitado + cursor -->
-    <span class="absolute inset-y-0 left-0" aria-hidden="true">
+    <!-- Texto digitado + cursor (fora da impressão) -->
+    <span class="absolute inset-y-0 left-0 print:hidden" aria-hidden="true">
       <span class="text-gold">{{ typedFirst }}</span>{{ typedSpace }}<span :class="lastClass">{{ typedLast }}</span><span
         class="typed-cursor ml-1 inline-block w-[0.08em] translate-y-[0.08em] bg-gold align-baseline"
       >&#8203;</span>

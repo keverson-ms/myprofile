@@ -13,9 +13,9 @@ const isExternal = (href) => href.startsWith('http')
 
 <template>
   <SidebarCard title="Contato" icon="contact">
-    <ul class="space-y-3">
-      <li v-for="item in items" :key="item.text" class="flex items-center gap-3 text-[13px] font-medium">
-        <span class="grid size-7 shrink-0 place-items-center rounded-full bg-ink text-white">
+    <ul class="space-y-3 print:space-y-1.5">
+      <li v-for="item in items" :key="item.text" class="flex items-center gap-3 text-[13px] font-medium print:gap-2">
+        <span class="grid size-7 shrink-0 place-items-center rounded-full bg-ink text-white print:size-4 print:bg-transparent print:text-fg/70">
           <AppIcon :name="item.icon" class="size-4" />
         </span>
         <a
