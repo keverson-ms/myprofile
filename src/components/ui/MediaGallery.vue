@@ -46,7 +46,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
 <template>
   <div>
-    <ul :aria-label="label" class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <ul :aria-label="label" class="grid grid-cols-1 gap-3 min-[540px]:grid-cols-2 sm:grid-cols-3">
       <li v-for="(m, i) in items" :key="m.src">
         <button
           type="button"
