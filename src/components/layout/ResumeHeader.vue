@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import TypedName from './TypedName.vue'
+import InstallButton from '../ui/InstallButton.vue'
 import { useSidebar } from '../../composables/useSidebar.js'
 
 defineProps({
@@ -31,6 +32,9 @@ const { open: sidebarOpen } = useSidebar()
     >
       {{ role }}
     </p>
+    <div class="mt-4 empty:hidden">
+      <InstallButton />
+    </div>
   </header>
 
   <header
@@ -75,6 +79,9 @@ const { open: sidebarOpen } = useSidebar()
         >
           {{ role }}
         </p>
+        <div v-if="!condensed" class="mt-5 empty:hidden">
+          <InstallButton />
+        </div>
       </div>
     </div>
   </header>

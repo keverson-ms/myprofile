@@ -19,7 +19,6 @@ import ResumeHeader from './components/layout/ResumeHeader.vue'
 
 import ContactCard from './components/sidebar/ContactCard.vue'
 import SocialCard from './components/sidebar/SocialCard.vue'
-import SkillsCard from './components/sidebar/SkillsCard.vue'
 import InterestsCard from './components/sidebar/InterestsCard.vue'
 
 import ProfileSection from './components/sections/ProfileSection.vue'
@@ -44,7 +43,6 @@ import CoursesSection from './components/sections/CoursesSection.vue'
     <AppSidebar :resume="resume">
       <ContactCard :items="resume.contact" />
       <SocialCard :items="resume.social" :owner="resume.firstName" />
-      <SkillsCard :skills="resume.skills" />
       <InterestsCard :items="resume.passions" class="print:hidden" />
     </AppSidebar>
 

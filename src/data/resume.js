@@ -75,6 +75,7 @@ export default {
     { icon: 'mail', text: 'keverson.marquesouza@gmail.com', href: 'mailto:keverson.marquesouza@gmail.com' },
     { icon: 'map', text: 'Cuiabá - MT, Brasil' },
     { icon: 'globe', text: 'keverson.com.br', href: 'https://keverson.com.br' },
+    { icon: 'github', text: 'github.com/keverson-ms', href: 'https://github.com/keverson-ms' },
   ],
 
   social: [
@@ -96,14 +97,6 @@ export default {
       handle: 'keversonMarqueSouza',
       href: 'https://www.facebook.com/keversonMarqueSouza/',
     },
-  ],
-
-  skills: [
-    { name: 'Vue.js', level: 5 },
-    { name: 'JavaScript', level: 5 },
-    { name: 'PHP / Laravel', level: 4 },
-    { name: 'Tailwind CSS', level: 4 },
-    { name: 'SQL / MySQL', level: 4 },
   ],
 
   passions: [
