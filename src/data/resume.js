@@ -332,6 +332,38 @@ export default {
       period: '11/2025 – Atual',
       commits: 769,
       featured: true,
+      award: {
+        title: 'Melhor Case',
+        event: '15º Encontro de Gestores de TI do Sistema Indústria',
+        place: 'Belém-PA, 2026',
+        detail: 'Projeto Portal Orion: case mais votado, com 39,53% dos votos.',
+      },
+      // Arquivos em public/projects/orion/
+      media: [
+        {
+          type: 'image',
+          src: 'projects/orion/melhor-case.jpeg',
+          alt: 'Telão do 15º Encontro de Gestores de TI anunciando o Projeto Portal Orion, da FIEMT, como Melhor Case, com 39,53% dos votos',
+          caption: 'Resultado da votação: Portal Orion eleito Melhor Case',
+        },
+        {
+          type: 'image',
+          src: 'projects/orion/premio.jpg',
+          alt: 'Keverson Souza segurando o troféu de Melhor Case diante do painel do 15º Encontro de Gestores de TI do Sistema Indústria, em Belém',
+          caption: 'Recebendo o troféu em Belém-PA',
+        },
+        {
+          type: 'video',
+          src: 'projects/orion/anuncio-melhor-case.mp4',
+          poster: 'projects/orion/melhor-case.jpeg',
+          alt: 'Vídeo do anúncio do Melhor Case no auditório do evento',
+          caption: 'Vídeo: anúncio do resultado no evento',
+        },
+      ],
+      links: [
+        { label: 'Fotos do evento (Flickr)', href: 'https://www.flickr.com/photos/sistemafiepaweb/55520170799/' },
+        { label: 'Mais fotos (Flickr)', href: 'https://www.flickr.com/photos/sistemafiepaweb/55520615625/' },
+      ],
       summary:
         'Criei e mantenho o Orion, meu principal projeto: um middleware em Laravel 12 que integra o TOTVS RM ' +
         '(folha e RH, via views no SQL Server) ao Active Directory. Eventos do Departamento Pessoal (admissão, ' +

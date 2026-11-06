@@ -110,10 +110,38 @@ const select = async (name) => {
           </li>
         </TransitionGroup>
 
-        <p v-if="visibleProjects.length" class="mt-4 text-center text-xs text-fg/50">
-          Commits próprios nos últimos 3 anos, sem contar merges.
+        <!-- Nota sobre a contagem de commits, com um ponto dourado pulsando para chamar a atenção -->
+        <p v-if="visibleProjects.length" class="mt-5 flex justify-center">
+          <span
+            class="commits-note inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-gold/5 px-4 py-1.5 text-xs font-medium text-fg/80"
+          >
+            <span class="relative flex size-2.5" aria-hidden="true">
+              <span class="absolute inline-flex size-full rounded-full bg-gold opacity-75 motion-safe:animate-ping" />
+              <span class="relative inline-flex size-2.5 rounded-full bg-gold" />
+            </span>
+            Commits próprios nos últimos 3 anos, sem contar merges.
+          </span>
         </p>
       </div>
     </div>
   </MainSection>
 </template>
+
+<style scoped>
+/* A borda da nota "respira" com um brilho dourado */
+.commits-note {
+  animation: note-glow 2.4s ease-in-out infinite;
+}
+@keyframes note-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-gold) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-gold) 18%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .commits-note { animation: none; }
+}
+</style>
