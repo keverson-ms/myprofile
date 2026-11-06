@@ -6,6 +6,7 @@ const props = defineProps({
 
   hoverSrc: { type: String, default: '' },
   swapped: { type: Boolean, default: false },
+  swapOnHover: { type: Boolean, default: false },
   alt: { type: String, default: '' },
 })
 
@@ -74,7 +75,9 @@ const onTap = (e) => {
   if (e.pointerType === 'touch') tapped.value = !tapped.value
 }
 
-const showAlt = computed(() => Boolean(props.hoverSrc) && (props.swapped || tapped.value))
+const showAlt = computed(
+  () => Boolean(props.hoverSrc) && (props.swapped || tapped.value || (props.swapOnHover && hovered.value)),
+)
 
 const shineStyle = computed(() => ({
   background: `radial-gradient(circle at ${50 + tilt.value.x * 40}% ${50 + tilt.value.y * 40}%, rgb(255 255 255 / 0.35), transparent 60%)`,

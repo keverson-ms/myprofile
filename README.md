@@ -1,4 +1,4 @@
-# Currículo — Keverson Souza
+# Currículo — Keverson Marques de Souza
 
 Currículo online responsivo feito com **Vue 3**, **Vite** e **Tailwind CSS**.
 

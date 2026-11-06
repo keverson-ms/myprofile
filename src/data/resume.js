@@ -1,6 +1,6 @@
 export default {
   firstName: 'Keverson',
-  lastName: 'Souza',
+  lastName: 'Marques de Souza',
   role: 'Desenvolvedor Full Stack | Integrações e Automação',
   photo: 'profile.jpg',
   photoHover: 'pen.jpg',
@@ -335,7 +335,7 @@ export default {
         {
           type: 'image',
           src: 'projects/orion/premio.jpg',
-          alt: 'Keverson Souza segurando o troféu de Melhor Case diante do painel do 15º Encontro de Gestores de TI do Sistema Indústria, em Belém',
+          alt: 'Keverson Marques de Souza segurando o troféu de Melhor Case diante do painel do 15º Encontro de Gestores de TI do Sistema Indústria, em Belém',
           caption: 'Recebendo o troféu em Belém-PA',
         },
         {

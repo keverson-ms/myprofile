@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import ProfilePhoto from '../ui/ProfilePhoto.vue'
 import ResumeHeader from './ResumeHeader.vue'
 import SidebarWave from './SidebarWave.vue'
@@ -22,6 +22,20 @@ const hovered = ref(false)
 const onHover = (e, value) => {
   if (e.pointerType !== 'touch') hovered.value = value
 }
+
+const printing = ref(false)
+const onBeforePrint = () => (printing.value = true)
+const onAfterPrint = () => (printing.value = false)
+onMounted(() => {
+  window.addEventListener('beforeprint', onBeforePrint)
+  window.addEventListener('afterprint', onAfterPrint)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('beforeprint', onBeforePrint)
+  window.removeEventListener('afterprint', onAfterPrint)
+})
+
+const photoInHeader = computed(() => !open.value && isDesktop.value && !printing.value)
 </script>
 
 <template>
@@ -38,14 +52,21 @@ const onHover = (e, value) => {
     <div class="absolute inset-x-0 top-[278px] bottom-0 hidden bg-ink lg:block" />
 
     <div class="flex flex-col items-center px-6 pt-10 pb-8 lg:p-0 print:flex-row print:gap-6 print:px-0 print:pt-0 print:pb-4">
-      <div class="size-44 lg:absolute lg:top-4.5 lg:left-10 lg:z-10 print:size-28 print:shrink-0">
-        <ProfilePhoto
-          :src="resume.photo"
-          :hover-src="resume.photoHover"
-          :swapped="hovered"
-          :alt="`${resume.firstName} ${resume.lastName}`"
-        />
-      </div>
+      <Teleport defer to="#header-photo" :disabled="!photoInHeader">
+        <div
+          :class="
+            photoInHeader ? 'size-full' : 'size-44 lg:absolute lg:top-4.5 lg:left-10 lg:z-10 print:size-28 print:shrink-0'
+          "
+        >
+          <ProfilePhoto
+            :src="resume.photo"
+            :hover-src="resume.photoHover"
+            :swapped="hovered"
+            :swap-on-hover="photoInHeader"
+            :alt="`${resume.firstName} ${resume.lastName}`"
+          />
+        </div>
+      </Teleport>
       <ResumeHeader
         compact
         class="mt-5 lg:hidden print:mt-0"
