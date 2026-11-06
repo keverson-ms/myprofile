@@ -64,9 +64,10 @@ import CoursesSection from './components/sections/CoursesSection.vue'
         :role="resume.role"
       />
 
-      <div class="space-y-16 lg:space-y-20 print:space-y-9">
+      <div class="space-y-16 lg:space-y-20 print:space-y-6">
 
-        <ProfileSection :paragraphs="resume.profile" />
+        <!-- Perfil + nuvem de tecnologias; clicar numa tecnologia mostra os projetos logo abaixo da nuvem -->
+        <ProfileSection :paragraphs="resume.profile" :stack="resume.stackCloud" :projects="resume.projects" />
         <ExperienceSection :items="resume.experience" />
         <EducationSection :items="resume.education" />
         <CoursesSection v-if="resume.courses?.length" :items="resume.courses" />

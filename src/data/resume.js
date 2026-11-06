@@ -2,23 +2,72 @@
 export default {
   firstName: 'Keverson',
   lastName: 'Souza',
-  role: 'Desenvolvedor de Sistemas',
+  role: 'Desenvolvedor Full Stack | Integrações e Automação',
   photo: 'profile.jpg',
   photoHover: 'pen.jpg', // exibida ao passar o mouse sobre a lateral
 
   // Cada item é um parágrafo
   profile: [
-    'Possuo habilidades em desenvolvimento Full Stack, com experiência em PHP, Laravel, JavaScript, TypeScript, ' +
-      'Vue.js, Inertia.js, Tailwind CSS e Python, atuando na construção de aplicações web, APIs, integrações e ' +
-      'sistemas corporativos. Tenho conhecimentos em bancos de dados, Docker, Git, GitHub, Microsoft Azure, ' +
-      'Active Directory, LDAP, Microsoft Entra ID, Microsoft Graph e soluções ERP, como RM Folha e Protheus.',
-    'Tenho interesse em arquitetura de software, integração de sistemas, automação de processos, infraestrutura, ' +
-      'computação em nuvem, DevOps e práticas de CI/CD. Busco aprimorar continuamente meus conhecimentos, explorar ' +
-      'novas tecnologias e desenvolver soluções cada vez mais eficientes, seguras, escaláveis e sustentáveis.',
-    'Como pretensão de futuro, desejo evoluir tecnicamente, ampliar minha atuação em arquitetura e engenharia de ' +
-      'software, aprofundar meus conhecimentos em Python, cloud computing e DevOps, além de participar de projetos ' +
-      'desafiadores, contribuindo tanto na construção de soluções quanto na evolução tecnológica e estratégica das ' +
-      'organizações.',
+    'Desenvolvedor Full Stack com mais de 8 anos de experiência em sistemas corporativos, integrações e automação ' +
+      'de processos na federação das indústrias de Mato Grosso (SESI/SENAI). Atuo com PHP/Laravel, Vue.js, ' +
+      'TypeScript e Python, com forte vivência em integração de ERPs (TOTVS Protheus e RM Folha), gestão de ' +
+      'identidades (Active Directory, Microsoft Entra ID e Graph) e entrega com Docker, CI/CD e Azure. Busco ' +
+      'evoluir em arquitetura de software, cloud e DevOps.',
+  ],
+
+  // Nuvem de palavras exibida abaixo do Perfil.
+  // Para adicionar uma tecnologia, inclua um item: { name: 'Nome', weight: 1 a 5 }
+  // (weight define tamanho/destaque: 5 = principal; também aceita só o texto, ex.: 'Redis', que vale peso 2)
+  // Pesos revisados com base na frequência nos projetos e nas experiências.
+  // Clicar numa palavra mostra os projetos que a citam (no nome, resumo ou etiquetas).
+  // match (opcional): sinônimos usados nessa busca, quando o nome da palavra difere do texto dos projetos.
+  stackCloud: [
+    // Núcleo (presentes na maioria dos projetos)
+    { name: 'Laravel', weight: 5 },
+    { name: 'Unimed', weight: 3 },
+    { name: 'PHP', weight: 5 },
+    { name: 'APIs REST', weight: 5, match: ['API REST', 'APIs REST', 'REST'] },
+    { name: 'MySQL', weight: 4 },
+    { name: 'Docker', weight: 4 },
+    { name: 'Azure App Service', weight: 4 },
+    { name: 'Linux', weight: 4 },
+    { name: 'Livewire', weight: 4 },
+    { name: 'LDAP / Active Directory', weight: 4, match: ['LDAP', 'Active Directory', 'AD'] },
+    { name: 'TOTVS Protheus', weight: 4 },
+    { name: 'TOTVS RM', weight: 4 },
+    { name: 'Redis', weight: 4 },
+    // Frequentes
+    { name: 'Nginx', weight: 3 },
+    { name: 'Apache', weight: 3 },
+    { name: 'PHP-FPM', weight: 3 },
+    { name: 'SQL Server', weight: 3 },
+    { name: 'PostgreSQL', weight: 3 },
+    { name: 'Filas e jobs (Horizon)', weight: 3, match: ['Horizon', 'filas', 'fila', 'jobs'] },
+    { name: 'OAuth2', weight: 3, match: ['OAuth2', 'OAuth 2.0', 'OAuth'] },
+    { name: 'Microsoft Entra ID', weight: 3 },
+    { name: 'Microsoft Graph', weight: 3 },
+    { name: 'SOAP', weight: 3 },
+    { name: 'Swagger / OpenAPI', weight: 3 },
+    { name: 'n8n', weight: 3 },
+    { name: 'Azure OpenAI', weight: 3 },
+    { name: 'Vue.js', weight: 3, match: ['Vue.js', 'Vue 3', 'Vue'] },
+    { name: 'Tailwind CSS', weight: 3 },
+    { name: 'JavaScript', weight: 3, match: ['JavaScript', 'jQuery'] },
+    { name: 'TypeScript', weight: 3 },
+    { name: 'Python', weight: 3 },
+    { name: 'GitHub Actions', weight: 3 },
+    // Pontuais
+    { name: 'Docker Swarm', weight: 2 },
+    { name: 'Traefik', weight: 2 },
+    { name: 'Supervisor', weight: 2 },
+    { name: "Let's Encrypt", weight: 2 },
+    { name: 'pgvector', weight: 2 },
+    { name: 'Inertia.js', weight: 2 },
+    { name: 'React', weight: 2 },
+    { name: 'Angular', weight: 2 },
+    { name: 'Java / Spring Boot', weight: 2 },
+    { name: 'Oracle', weight: 2 },
+    { name: 'Git / GitHub', weight: 2, match: ['GitHub', 'git hooks', 'Gitflow'] },
   ],
 
   contact: [
@@ -65,12 +114,19 @@ export default {
   ],
 
   // Da mais recente para a mais antiga.
-  // description: lista de parágrafos | highlights: destaques (opcional) | tags: tecnologias (opcional)
+  // Versão enxuta (sempre visível e no PDF):
+  //   summary: tópicos curtos | tags: stack principal (6 a 9 tecnologias)
+  // Detalhes (botão "Ver detalhes", fora do PDF):
+  //   description: parágrafos | highlights: destaques | closing: parágrafo final (todos opcionais)
   experience: [
     {
       company: 'SESI - Serviço Social da Indústria (Mato Grosso)',
       period: '03/2026 - Atual',
       position: 'Desenvolvedor de Automação',
+      summary: [
+        'Desenvolvo aplicações web e automações de processos com Laravel, Vue.js, Python e n8n.',
+        'Integro ERPs (Protheus, RM Folha) e serviços Microsoft (Entra ID, Graph).',
+      ],
       description: [
         'Atuo no desenvolvimento e na integração de soluções corporativas, com foco em aplicações web, automação ' +
           'de processos, interoperabilidade entre sistemas e gestão de identidades.',
@@ -118,16 +174,18 @@ export default {
             'e otimização de aplicações.',
         },
       ],
-      tags: [
-        'PHP', 'Laravel', 'Vue.js', 'Inertia.js', 'TypeScript', 'Tailwind CSS', 'Python', 'n8n',
-        'LDAP / Active Directory', 'Microsoft Entra ID', 'Microsoft Graph', 'TOTVS RM Folha', 'Protheus',
-        'Docker', 'Git / GitHub', 'CI/CD', 'Microsoft Azure',
-      ],
+      tags: ['Laravel', 'Vue.js', 'Python', 'n8n', 'Entra ID / Graph', 'Protheus', 'Docker', 'CI/CD', 'Azure'],
     },
     {
       company: 'SESI - Serviço Social da Indústria (Mato Grosso)',
       period: '03/2021 - 02/2026',
       position: 'Consultor de TI',
+      summary: [
+        'Desenvolvi e sustentei sistemas e APIs REST em Laravel, Vue.js e TypeScript, do levantamento de ' +
+          'requisitos à implantação.',
+        'Integrei sistemas com Protheus, RM Folha, AD/LDAP e Microsoft Graph.',
+        'Implantei pipelines CI/CD e ambientes com Docker e Azure.',
+      ],
       description: [
         'Atuei no desenvolvimento, manutenção e evolução de sistemas e aplicações corporativas, participando de ' +
           'diferentes etapas do ciclo de vida do software, desde o levantamento de necessidades e compreensão das ' +
@@ -177,37 +235,27 @@ export default {
         'Ao longo desse período, desenvolvi uma visão abrangente do desenvolvimento de software, atuando tanto no ' +
         'backend quanto no frontend e ampliando minha participação em questões relacionadas à arquitetura de ' +
         'aplicações, integração de sistemas, infraestrutura e processos de entrega de software.',
-      tags: [
-        'PHP', 'Laravel', 'JavaScript', 'TypeScript', 'Vue.js', 'Inertia.js', 'Tailwind CSS', 'APIs REST',
-        'LDAP / Active Directory', 'Microsoft Graph', 'Microsoft Entra ID', 'RM Folha', 'TOTVS Protheus',
-        'Git', 'Docker', 'CI/CD', 'Microsoft Azure',
-      ],
+      tags: ['Laravel', 'Vue.js', 'TypeScript', 'APIs REST', 'LDAP / AD', 'Microsoft Graph', 'Docker', 'Azure'],
     },
     {
       company: 'SENAI - Serviço Nacional de Aprendizagem Industrial (Mato Grosso)',
       period: '02/2019 - 03/2021',
       position: 'Analista de TI',
-      highlights: [
-        { text: 'Sustentação da infraestrutura web da federação (SESI, SENAI, IEL, FIEMT).' },
-        { text: 'Integrações com Protheus, Gestão Escolar e LDAP/Active Directory.' },
-        { text: 'Desenvolvimento com PHP, Laravel, JavaScript, Bootstrap e Tailwind.' },
-        { text: 'Banco de dados MySQL, PostgreSQL e SQL Server.' },
-        { text: 'Levantamento de requisitos, execução, homologação e implantação em produção.' },
+      summary: [
+        'Sustentei a infraestrutura web da federação (SESI, SENAI, IEL e FIEMT).',
+        'Integrei sistemas com Protheus, Gestão Escolar e AD/LDAP.',
+        'Desenvolvi em PHP/Laravel e JavaScript, com MySQL, PostgreSQL e SQL Server.',
       ],
-      tags: [
-        'PHP', 'Laravel', 'JavaScript', 'Bootstrap', 'Tailwind CSS',
-        'MySQL', 'PostgreSQL', 'SQL Server', 'Protheus', 'LDAP / Active Directory',
-      ],
+      tags: ['PHP', 'Laravel', 'JavaScript', 'SQL Server', 'PostgreSQL', 'Protheus', 'LDAP / AD'],
     },
     {
       company: 'Boot Sistemas de Gestão e Marketing (Aequilibrio Pagamentos e Sistemas)',
       period: '08/2017 - 02/2019',
       position: 'Analista de Sistemas',
+      summary: [
+        'Iniciei como estagiário e fui efetivado, desenvolvendo soluções web em PHP, JavaScript e MySQL.',
+      ],
       description: [
-        'Embora o registro em carteira compreenda o período de 01/08/2018 a 04/08/2019, minha trajetória na ' +
-          'empresa teve início por meio do cumprimento de estágio obrigatório, com duração de um ano. Após esse ' +
-          'período, fui efetivado, dando continuidade às atividades profissionais e assumindo responsabilidades ' +
-          'cada vez maiores no desenvolvimento de soluções tecnológicas.',
         'Fui o primeiro funcionário contratado pela empresa, atuando diretamente ao lado do sócio e líder técnico, ' +
           'que concentrava o conhecimento técnico e operacional do negócio. Durante os primeiros seis meses, tive a ' +
           'oportunidade de adquirir conhecimentos, desenvolver habilidades técnicas e compreender os processos de ' +
@@ -246,16 +294,265 @@ export default {
         'soluções sob demanda até a concepção e evolução de produtos próprios, proporcionando uma experiência ' +
         'abrangente em desenvolvimento de software, participação no crescimento de uma empresa de tecnologia e ' +
         'construção de soluções voltadas às necessidades reais dos clientes.',
-      tags: ['PHP', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
+      tags: ['PHP', 'JavaScript', 'MySQL'],
     },
   ],
 
   // description é opcional
   education: [
     {
-      institution: 'Instituto Cuiabá de Ensino e Cultura (MT)',
+      institution: 'Instituto Cuiabá de Ensino e Cultura (ICEC)',
       period: '02/2014 - 10/2018',
-      course: 'Ensino Superior em Ciência da Computação',
+      course: 'Ciência da Computação',
+    },
+  ],
+
+  // Projetos — a seção só aparece quando houver ao menos um item.
+  // { name, org?, period?, commits?, summary (máx. 500 caracteres), stack?: [], integrations?: [], infra?: [] }
+  // Levantados a partir dos commits dos últimos 3 anos (desde 11/2023). Mantenha o summary com até 500 caracteres.
+  projects: [
+    {
+      name: 'SGI — Plataforma de Gestão Integrada',
+      org: 'Sistema FIEMT',
+      period: '11/2023 – 09/2025',
+      summary:
+        'Integrei a API REST da Unimed ao SGI (Laravel 9/PHP 8): token Bearer em cache, jobs em filas Redis/Horizon ' +
+        'com retentativas e agendamentos que importam contratos, titulares, dependentes, faturas, mensalidades e ' +
+        'coparticipações. Expus APIs REST protegidas por OAuth2 (Passport) e documentadas em Swagger, consumidas ' +
+        'pelos portais. Criei o módulo de Não Similaridade com login LDAP/AD, consulta de NCM no Siscomex e uma API ' +
+        'de verificação de certificados SSL.',
+      stack: ['Laravel 9', 'PHP 8', 'Livewire', 'MySQL', 'Redis'],
+      integrations: ['Unimed', 'APIs REST', 'OAuth2 (Passport)', 'Swagger', 'LDAP / AD', 'Siscomex', 'TOTVS Protheus', 'TOTVS RM'],
+      infra: ['Horizon', 'Filas e jobs', 'Azure App Service', 'Linux', 'Kudu'],
+    },
+    {
+      name: 'Plataforma de automação e IA (n8n)',
+      org: 'Sistema FIEMT',
+      period: '05/2025 – 09/2026',
+      summary:
+        'Implantei e mantenho o n8n self-hosted em Docker Swarm sobre Linux, com Traefik v3 como proxy reverso (TLS ' +
+        'com certificado coringa, rotas interna e externa e métricas restritas por IP), PostgreSQL 17 com pgvector e ' +
+        'Redis em modo fila com workers dedicados. Construí fluxos de IA (RAG) com Azure OpenAI, embeddings em ' +
+        'PGVector e memória de chat no Postgres, integrações com APIs internas e webhook do WhatsApp, e documentei a ' +
+        'gestão de certificados com OpenSSL.',
+      stack: ['n8n', 'PostgreSQL 17', 'pgvector', 'Redis'],
+      integrations: ['Azure OpenAI', 'RAG', 'WhatsApp', 'APIs REST'],
+      infra: ['Docker Swarm', 'Traefik', 'Linux', 'OpenSSL', 'Prometheus'],
+    },
+    {
+      name: 'Tili — Inteligência Legislativa',
+      org: 'Plataforma multi-tenant',
+      period: '02/2024 – 03/2026',
+      summary:
+        'Atuei na infraestrutura do Tili, plataforma multi-tenant de inteligência legislativa em Laravel e Vue ' +
+        '3/Inertia. Containerizei a aplicação com Docker Compose (Nginx, PHP-FPM 8.3, MySQL 8, Redis e Supervisor), ' +
+        "criei templates Nginx por domínio com SSL via Certbot/Let's Encrypt, separei os ambientes local, homologação " +
+        'e produção em servidores Linux (Ubuntu), automatizei o deploy com scripts shell e documentei todo o processo.',
+      stack: ['Laravel', 'Vue 3', 'Inertia.js', 'MySQL 8', 'Redis'],
+      infra: ['Docker Compose', 'Nginx', 'PHP-FPM', 'Supervisor', "Let's Encrypt", 'Linux (Ubuntu)', 'Shell script'],
+    },
+    {
+      name: 'Atualização Cadastral de Colaboradores',
+      org: 'Sistema FIEMT',
+      period: '02/2024 – 03/2025',
+      summary:
+        'Desenvolvi do zero o sistema em que os colaboradores atualizam dados pessoais e formações, com aprovação do ' +
+        'RH (Laravel 9, Livewire, Tailwind, MySQL). Integrei o login ao Active Directory via LDAP (LdapRecord), li ' +
+        'tabelas do TOTVS RM direto no SQL Server e gravei os dados aprovados de volta via webservice SOAP, com filas ' +
+        'e jobs agendados. Implementei notificações por e-mail, logs de auditoria e ambiente Docker com drivers do ' +
+        'SQL Server.',
+      stack: ['Laravel 9', 'Livewire', 'Tailwind CSS', 'Alpine.js', 'MySQL', 'SQL Server'],
+      integrations: ['LDAP / AD', 'TOTVS RM', 'SOAP', 'SMTP'],
+      infra: ['Docker', 'Supervisor', 'Filas e jobs'],
+    },
+    {
+      name: 'Aprender — Gestão de Programa Educacional',
+      org: 'Sistema FIEMT',
+      period: '08/2025 – 10/2025',
+      summary:
+        'Desenvolvi a plataforma Aprender (Laravel 9, Livewire, Vite, MySQL) para gestão de um programa educacional: ' +
+        'trilhas formativas, escolas parceiras, matrizes curriculares, editais e módulos com upload de arquivos. ' +
+        'Implementei login híbrido (LDAP/AD e base local), verificação de e-mail e redefinição de senha, permissões ' +
+        'hierárquicas por papel com cache, exportação para Excel, integração com a API do IBGE e painéis de BI ' +
+        'incorporados, com deploy no Azure App Service.',
+      stack: ['Laravel 9', 'Livewire', 'Vite', 'Tailwind CSS', 'MySQL'],
+      integrations: ['LDAP / AD', 'IBGE', 'SMTP', 'Painéis de BI'],
+      infra: ['Azure App Service', 'Kudu'],
+    },
+    {
+      name: 'Corporate Login — SSO com Microsoft Entra ID',
+      org: 'Biblioteca PHP (Composer)',
+      period: '10/2026',
+      summary:
+        'Criei um pacote Composer de Single Sign-On com Microsoft Entra ID (OpenID Connect/OAuth 2.0 com PKCE), com ' +
+        'validação de ID Token JWT via JWKS, consulta de perfil pelo Microsoft Graph e provisionamento automatizado ' +
+        'de aplicações e segredos no Entra ID. Ofereci integração pronta para Laravel 10–12 (Service Provider, ' +
+        'middleware, rotas e facades) e para PHP puro, com testes PHPUnit, PHPStan e PHPCS.',
+      stack: ['PHP 8.1+', 'Laravel 10–12', 'Guzzle'],
+      integrations: ['Microsoft Entra ID', 'OpenID Connect', 'OAuth 2.0 (PKCE)', 'JWT', 'Microsoft Graph'],
+      infra: ['Composer', 'PHPUnit', 'PHPStan'],
+    },
+    {
+      name: 'ADSentinel — Auditoria do Active Directory',
+      org: 'Sistema FIEMT',
+      period: '08/2026 – 10/2026',
+      summary:
+        'Desenvolvi em Python uma ferramenta de auditoria do Active Directory que lê o log de segurança dos Domain ' +
+        'Controllers (pywin32/Event Log API via RPC ou PowerShell remoto via WinRM) e extrai eventos de criação, ' +
+        'alteração e bloqueio de contas, grupos e logons. Gera arquivos JSON Lines por Event ID, com leitura ' +
+        'incremental em lotes, checkpoint para retomada e modo em tempo real, alimentando o monitoramento de segurança.',
+      stack: ['Python', 'pywin32'],
+      integrations: ['Active Directory', 'Windows Event Log', 'WinRM / PowerShell'],
+      infra: ['Windows Server'],
+    },
+    {
+      name: 'Portal do Sistema FIEMT',
+      org: 'Sistema FIEMT',
+      period: '02/2024 – 09/2026',
+      summary:
+        'Atuei no portal institucional do Sistema FIEMT (Laravel/PHP, MySQL). Integrei via API REST (Guzzle) o ' +
+        'formulário de não similaridade do CIN ao SGI, com upload de arquivos, fila de envio e mapeamento de dados. ' +
+        'Criei homes dinâmicas gerenciadas pelo CMS, o formulário de enquadramento sindical com envio de e-mail e ' +
+        'otimizei consultas. Migrei a stack de PHP 7.4/Laravel 7 para PHP 8/Laravel 9, reforcei a sanitização de ' +
+        'entradas e publico no Azure App Service Linux via Kudu.',
+      stack: ['Laravel 9', 'PHP 8', 'MySQL', 'jQuery'],
+      integrations: ['APIs REST', 'reCAPTCHA', 'SMTP'],
+      infra: ['Azure App Service', 'Linux', 'Kudu'],
+    },
+    {
+      name: 'CMS Corporativo',
+      org: 'Sistema FIEMT',
+      period: '11/2023 – 07/2025',
+      summary:
+        'Mantive e evoluí o CMS corporativo em PHP 8 e MySQL (PDO), que alimenta os portais institucionais via API. ' +
+        'Desenvolvi melhorias nos módulos de categorias, links, FAQ, serviços, downloads e eventos, regras para os ' +
+        'Portais da Transparência/TCU, fluxo de publicação com confirmação e exclusão restrita, ouvidoria e ' +
+        'pré-inscrições em cursos. Corrigi exposição de dados sensíveis, tratei erros de banco e configurei Apache ' +
+        '(.htaccess) e CORS para a API.',
+      stack: ['PHP 8.3', 'MySQL', 'Bootstrap', 'jQuery'],
+      integrations: ['APIs REST', 'Mailjet', 'SMTP'],
+      infra: ['Apache', 'CORS'],
+    },
+    {
+      name: 'Portal de Carreiras',
+      org: 'Sistema FIEMT',
+      period: '12/2023 – 04/2025',
+      summary:
+        'Desenvolvi do zero o portal de carreiras em Laravel 8 e Livewire, com Bootstrap 5 e SASS, integrando a API ' +
+        'REST da Gupy para listar vagas com filtros por departamento, local e modalidade (híbrido/remoto) e ' +
+        'consumindo conteúdos gerenciados no CMS (banners, depoimentos, FAQ). Implementei cache para performance, ' +
+        'tolerância a falhas da API, SSL forçado e redirecionamentos por ambiente, com deploy no Azure App Service ' +
+        'via Kudu.',
+      stack: ['Laravel 8', 'Livewire', 'Bootstrap 5', 'SASS', 'MySQL'],
+      integrations: ['Gupy', 'APIs REST'],
+      infra: ['Azure App Service', 'Kudu'],
+    },
+    {
+      name: 'Portais da Transparência SESI e SENAI MT',
+      org: 'SESI e SENAI MT',
+      period: '11/2023 – 06/2025',
+      summary:
+        'Desenvolvi e refatorei os módulos dos Portais da Transparência do SESI e do SENAI MT (Laravel/PHP): ' +
+        'orçamento e execução orçamentária, contratos, licitações, integridade, demonstrações contábeis, legislação ' +
+        'e dirigentes, com componentes Blade reutilizáveis e conteúdo vindo do CMS. Conduzi a migração do Laravel 7 ' +
+        'para o 10 (PHP 8.1) nos portais e nos sites de documentos do TCU, criei git hooks para impor o Gitflow e ' +
+        'publiquei no Azure App Service Linux via Kudu.',
+      stack: ['Laravel 10', 'PHP 8.1', 'MySQL', 'SQL Server', 'Redis'],
+      integrations: ['APIs REST', 'reCAPTCHA'],
+      infra: ['Azure App Service', 'Linux', 'Kudu', 'Git hooks'],
+    },
+    {
+      name: 'Moodle — Infraestrutura do AVA',
+      org: 'Sistema FIEMT',
+      period: '04/2024 – 09/2026',
+      summary:
+        'Montei o ambiente Docker inicial do Moodle (Nginx, PHP-FPM 8.0 a 8.3 e MySQL) e depois assumi a stack de ' +
+        'produção do Moodle 4.2: PHP 8.1-FPM em Debian com extensões GD, intl, LDAP e OPcache, Nginx como proxy ' +
+        'FastCGI com HTTPS, MySQL 8 e cron no contêiner. Fiz hardening (server_tokens off, permissões, remoção de ' +
+        'certificados e segredos do repositório), ajustei o php.ini e documentei a extração de certificados de PFX ' +
+        'com OpenSSL.',
+      stack: ['Moodle 4.2', 'PHP 8.1', 'MySQL 8'],
+      integrations: ['LDAP / AD'],
+      infra: ['Docker', 'Nginx', 'PHP-FPM', 'Linux (Debian)', 'OpenSSL'],
+    },
+    {
+      name: 'Cantina — Pedidos de Autoatendimento',
+      org: 'Sistema FIEMT',
+      period: '07/2024 – 08/2024',
+      summary:
+        'Desenvolvi um sistema de pedidos para cantina corporativa em Laravel 10, Livewire 3/Volt, Tailwind e MySQL, ' +
+        'com carrinho de compras, finalização de pedidos e impressão de comprovantes em impressora térmica via ' +
+        'ESC/POS. Estruturei a integração REST com o ERP TOTVS Protheus, usei Redis com Horizon e Pulse para filas e ' +
+        'monitoramento e preparei o ambiente em containers Docker.',
+      stack: ['Laravel 10', 'Livewire 3', 'Tailwind CSS', 'MySQL', 'Redis'],
+      integrations: ['TOTVS Protheus', 'APIs REST', 'ESC/POS'],
+      infra: ['Docker', 'Horizon', 'Pulse'],
+    },
+    {
+      name: 'SINAES-MT — Avaliação Institucional',
+      org: 'Ensino superior',
+      period: '11/2024',
+      summary:
+        'Atuei no sistema de avaliação institucional (SINAES) em Laravel 11, Inertia.js, Vue 3 e MySQL. Desenvolvi a ' +
+        'integração REST com o sistema de gestão educacional para importar unidades, cursos e alunos por jobs em ' +
+        'fila, implementei auditoria de ações, sessão única por usuário e escopos globais, e criei o script de deploy ' +
+        'para o Azure App Service Linux (Kudu) com Apache.',
+      stack: ['Laravel 11', 'Inertia.js', 'Vue 3', 'Tailwind CSS', 'MySQL'],
+      integrations: ['APIs REST', 'TOTVS RM'],
+      infra: ['Azure App Service', 'Linux', 'Kudu', 'Apache'],
+    },
+    {
+      name: 'Gestão de Treinamentos',
+      org: 'Sistema FIEMT',
+      period: '04/2025 – 06/2025',
+      summary:
+        'Configurei o CI/CD do sistema de gestão de treinamentos: GitHub Actions compilando o backend Java 21/Spring ' +
+        'Boot 3.3 (JPA, Spring Security com JWT, OpenAPI, MySQL) via Maven e publicando no Azure App Service, e ' +
+        'workflows do frontend Angular 17 (PrimeNG) para Azure App Service e Azure Static Web Apps, com servidor ' +
+        'Express para o build de produção. Ajustei a segurança e o CORS, as variáveis de ambiente e a documentação.',
+      stack: ['Java 21', 'Spring Boot 3', 'Angular 17', 'MySQL'],
+      integrations: ['JWT', 'OpenAPI'],
+      infra: ['GitHub Actions', 'Azure App Service', 'Azure Static Web Apps', 'Docker'],
+    },
+    {
+      name: 'Vênus — Estornos e Reclassificações Contábeis',
+      org: 'Sistema FIEMT',
+      period: '11/2023 – 04/2025',
+      summary:
+        'No Vênus, aplicação React (Material UI e Ant Design) para estornos e reclassificações contábeis e de folha, ' +
+        'implementei o consumo da API REST do TOTVS Protheus com OAuth2 (token Bearer via interceptor do axios), ' +
+        'filtros de contas contábeis, centros de custo e folha, validações de formulários com Formik/Yup e o script ' +
+        'de publicação da homologação em servidor Linux.',
+      stack: ['React', 'Material UI', 'Ant Design', 'Formik'],
+      integrations: ['TOTVS Protheus', 'OAuth2', 'APIs REST'],
+      infra: ['Linux', 'Shell script'],
+    },
+    {
+      name: 'Portais SENAI, FATEC SENAI e IEL MT',
+      org: 'SENAI, FATEC e IEL MT',
+      period: '11/2023 – 09/2026',
+      summary:
+        'Atuei nos portais do SENAI, da FATEC SENAI e do IEL MT (Laravel/PHP), que reúnem dados de MySQL, SQL Server ' +
+        '(visões do TOTVS RM) e Oracle e integram a API de vagas da Empregare. Migrei projetos do Laravel 7 para 8 e ' +
+        '9 (PHP 8), tratei injeção de SQL e sanitização, adicionei reCAPTCHA e Form Requests nas pré-inscrições, ' +
+        'configurei conexão MySQL com SSL/TLS, integrei RD Station e Meta Pixel e otimizei o desempenho, com deploy ' +
+        'no Azure App Service via Kudu.',
+      stack: ['Laravel 9', 'PHP 8', 'MySQL', 'SQL Server', 'Oracle'],
+      integrations: ['TOTVS RM', 'Empregare', 'reCAPTCHA', 'RD Station', 'Meta Pixel'],
+      infra: ['Azure App Service', 'Kudu', 'SSL/TLS'],
+    },
+    {
+      name: 'Eficientômetro do CSC',
+      org: 'Sistema FIEMT',
+      period: '05/2025',
+      summary:
+        'Criei o Eficientômetro do CSC, dashboard web responsivo em React e TypeScript (Vite, Tailwind, shadcn/ui, ' +
+        'Recharts) que apresenta as reduções de custos e de horas obtidas pelo Centro de Serviços Compartilhados, ' +
+        'com fluxo de cadastro e aprovação, rotas protegidas por perfil, testes unitários e a especificação da ' +
+        'integração com API Node/Express e MySQL.',
+      stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+      integrations: ['APIs REST', 'MySQL'],
+      infra: ['Testes unitários'],
     },
   ],
 

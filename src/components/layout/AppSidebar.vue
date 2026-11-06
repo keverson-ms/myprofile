@@ -31,7 +31,7 @@ const onHover = (e, value) => {
        recorta o conteúdo, que mantém a largura de 25vw (efeito de deslizar, sem espremer). -->
   <aside
     id="sidebar"
-    class="relative bg-ink pb-10 lg:col-start-1 lg:h-screen lg:overflow-hidden lg:bg-transparent lg:pb-0 print:mb-8 print:h-auto print:border-b print:border-fg/15 print:bg-transparent print:pb-6"
+    class="relative bg-ink pb-10 lg:col-start-1 lg:h-screen lg:overflow-hidden lg:bg-transparent lg:pb-0 print:mb-5 print:h-auto print:border-b print:border-fg/15 print:bg-transparent print:pb-4"
     :inert="!open && isDesktop ? true : undefined"
     @pointerenter="onHover($event, true)"
     @pointerleave="onHover($event, false)"
@@ -45,7 +45,7 @@ const onHover = (e, value) => {
     <div class="absolute inset-x-0 top-[278px] bottom-0 hidden bg-ink lg:block" />
 
     <!-- Foto (+ nome no celular/tablet). No PDF: foto pequena ao lado do nome, alinhados à esquerda. -->
-    <div class="flex flex-col items-center px-6 pt-10 pb-8 lg:p-0 print:flex-row print:gap-6 print:px-0 print:pt-0 print:pb-6">
+    <div class="flex flex-col items-center px-6 pt-10 pb-8 lg:p-0 print:flex-row print:gap-6 print:px-0 print:pt-0 print:pb-4">
       <div class="size-44 lg:absolute lg:top-4.5 lg:left-10 lg:z-10 print:size-28 print:shrink-0">
         <ProfilePhoto
           :src="resume.photo"
