@@ -16,18 +16,19 @@ const isClickable = (word) => countOf(word) === null || countOf(word) > 0
 
 const DEFAULT_WEIGHT = 2
 
-// Tamanho e cor por peso (1 = discreto … 5 = principal)
+// Tamanho e cor por peso (1 = discreto … 5 = principal; 6 = destaque máximo, fica no centro da nuvem)
 const STYLES = {
   1: 'text-sm font-medium text-fg/50',
   2: 'text-base font-medium text-fg/65',
   3: 'text-lg font-semibold text-fg/80 sm:text-xl',
   4: 'text-xl font-bold text-fg sm:text-2xl',
   5: 'text-2xl font-extrabold text-gold sm:text-4xl',
+  6: 'text-4xl font-black tracking-wide text-gold uppercase drop-shadow-[0_0_18px_color-mix(in_srgb,var(--color-gold)_45%,transparent)] sm:text-6xl',
 }
 
 const normalize = (w) => {
   const item = typeof w === 'string' ? { name: w } : w
-  const weight = Math.min(5, Math.max(1, Math.round(item.weight ?? DEFAULT_WEIGHT)))
+  const weight = Math.min(6, Math.max(1, Math.round(item.weight ?? DEFAULT_WEIGHT)))
   return { ...item, name: item.name, weight }
 }
 

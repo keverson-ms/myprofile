@@ -104,10 +104,15 @@ const select = async (name) => {
           leave-active-class="transition duration-150 absolute opacity-0"
           move-class="transition duration-300"
         >
-          <li v-for="project in visibleProjects" :key="project.name">
+          <!-- O projeto em destaque (featured) ocupa a largura toda -->
+          <li v-for="project in visibleProjects" :key="project.name" :class="{ 'md:col-span-2': project.featured }">
             <ProjectCard :project="project" :highlight="highlight" />
           </li>
         </TransitionGroup>
+
+        <p v-if="visibleProjects.length" class="mt-4 text-center text-xs text-fg/50">
+          Commits próprios nos últimos 3 anos, sem contar merges.
+        </p>
       </div>
     </div>
   </MainSection>

@@ -78,7 +78,7 @@
   }
 
   /* Reduz a escala para caber mais conteúdo por página sem perder legibilidade */
-  body { zoom: 0.74; }
+  body { zoom: 0.7; }
 
   /* VLibras (o widget cria elementos próprios com CSS forte; o #app dá peso suficiente para vencer) */
   #app ~ [vw],

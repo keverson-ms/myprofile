@@ -16,12 +16,14 @@ export default {
   ],
 
   // Nuvem de palavras exibida abaixo do Perfil.
-  // Para adicionar uma tecnologia, inclua um item: { name: 'Nome', weight: 1 a 5 }
+  // Para adicionar uma tecnologia, inclua um item: { name: 'Nome', weight: 1 a 5 } (6 = destaque máximo, no centro)
   // (weight define tamanho/destaque: 5 = principal; também aceita só o texto, ex.: 'Redis', que vale peso 2)
   // Pesos revisados com base na frequência nos projetos e nas experiências.
   // Clicar numa palavra mostra os projetos que a citam (no nome, resumo ou etiquetas).
   // match (opcional): sinônimos usados nessa busca, quando o nome da palavra difere do texto dos projetos.
   stackCloud: [
+    // Projeto principal: peso 6 (maior palavra, no centro da nuvem)
+    { name: 'Orion', weight: 6 },
     // Núcleo (presentes na maioria dos projetos)
     { name: 'Laravel', weight: 5 },
     { name: 'Unimed', weight: 3 },
@@ -45,6 +47,7 @@ export default {
     { name: 'Filas e jobs (Horizon)', weight: 3, match: ['Horizon', 'filas', 'fila', 'jobs'] },
     { name: 'OAuth2', weight: 3, match: ['OAuth2', 'OAuth 2.0', 'OAuth'] },
     { name: 'Microsoft Entra ID', weight: 3 },
+    { name: 'SSO / OpenID Connect', weight: 3, match: ['SSO', 'OpenID Connect', 'Single Sign-On'] },
     { name: 'Microsoft Graph', weight: 3 },
     { name: 'SOAP', weight: 3 },
     { name: 'Swagger / OpenAPI', weight: 3 },
@@ -124,6 +127,8 @@ export default {
       period: '03/2026 - Atual',
       position: 'Desenvolvedor de Automação',
       summary: [
+        'Criei e mantenho o Orion, middleware que integra o TOTVS RM ao Active Directory (contas criadas, ' +
+          'atualizadas e desativadas automaticamente a partir da folha) e atua como provedor de SSO OAuth2/OpenID Connect.',
         'Desenvolvo aplicações web e automações de processos com Laravel, Vue.js, Python e n8n.',
         'Integro ERPs (Protheus, RM Folha) e serviços Microsoft (Entra ID, Graph).',
       ],
@@ -132,6 +137,14 @@ export default {
           'de processos, interoperabilidade entre sistemas e gestão de identidades.',
       ],
       highlights: [
+        {
+          title: 'Orion',
+          text:
+            'Criei e mantenho o Orion (Laravel 12, Vue 3/Inertia), que lê as views do TOTVS RM no SQL Server e ' +
+            'traduz admissões, demissões, férias, licenças e transferências em ações no Active Directory via LDAP, ' +
+            'com filas no Redis, workers sob Supervisor e deploy em Docker Compose (Nginx, PHP-FPM) sobre Linux. ' +
+            'Também atua como provedor de SSO OAuth2/OpenID Connect para outras aplicações.',
+        },
         {
           title: 'Backend',
           text: 'Desenvolvo com PHP e Laravel: APIs, regras de negócio e integrações entre sistemas.',
@@ -174,7 +187,7 @@ export default {
             'e otimização de aplicações.',
         },
       ],
-      tags: ['Laravel', 'Vue.js', 'Python', 'n8n', 'Entra ID / Graph', 'Protheus', 'Docker', 'CI/CD', 'Azure'],
+      tags: ['Laravel', 'Vue.js', 'Python', 'n8n', 'LDAP / AD', 'SSO / OIDC', 'Entra ID / Graph', 'Protheus', 'Docker', 'Azure'],
     },
     {
       company: 'SESI - Serviço Social da Indústria (Mato Grosso)',
@@ -307,14 +320,38 @@ export default {
     },
   ],
 
-  // Projetos — a seção só aparece quando houver ao menos um item.
-  // { name, org?, period?, commits?, summary (máx. 500 caracteres), stack?: [], integrations?: [], infra?: [] }
-  // Levantados a partir dos commits dos últimos 3 anos (desde 11/2023). Mantenha o summary com até 500 caracteres.
+  // Projetos — exibidos abaixo da nuvem de tecnologias (clicar numa palavra filtra os projetos).
+  // { name, org?, period?, commits?, featured?, summary, stack?: [], integrations?: [], infra?: [] }
+  // Levantados a partir dos commits dos últimos 3 anos (desde 11/2023).
+  // commits: commits próprios no período, sem contar merges (soma dos repositórios quando o card agrupa vários).
+  // summary: até 500 caracteres; o projeto em destaque (featured: true) ocupa a largura toda e pode ter texto maior.
   projects: [
+    {
+      name: 'Orion — Integração RM × Active Directory e SSO',
+      org: 'Sistema FIEMT',
+      period: '11/2025 – Atual',
+      commits: 769,
+      featured: true,
+      summary:
+        'Criei e mantenho o Orion, meu principal projeto: um middleware em Laravel 12 que integra o TOTVS RM ' +
+        '(folha e RH, via views no SQL Server) ao Active Directory. Eventos do Departamento Pessoal (admissão, ' +
+        'demissão, férias, licenças e transferências) disparam automaticamente a criação, atualização, desativação ' +
+        'e transferência de contas no AD via LDAP (LdapRecord), com sincronização de grupos e OUs e reconciliação ' +
+        'periódica por CPF, e-mail ou matrícula. Os processos rodam em comandos agendados e jobs em filas nomeadas ' +
+        'no Redis, executados por workers sob Supervisor. O Orion também é provedor de SSO OAuth2/OpenID Connect ' +
+        '(Passport) para outras aplicações e oferece login via LDAP, Microsoft Entra ID e link por e-mail. O painel ' +
+        'administrativo, em Vue 3 com Inertia e Tailwind, gerencia usuários, permissões, seções e filiais, com ' +
+        'auditoria e templates de e-mail. Em produção, roda em Docker Compose sobre Linux: Nginx com HTTPS, ' +
+        'PHP-FPM 8.2 com OPcache, MySQL e Redis, com validação de Gitflow e padronização de código no GitHub Actions.',
+      stack: ['Laravel 12', 'PHP 8.2', 'Vue 3', 'Inertia.js', 'Tailwind CSS', 'MySQL', 'SQL Server', 'Redis'],
+      integrations: ['TOTVS RM', 'LDAP / AD', 'OAuth2', 'OpenID Connect (SSO)', 'Microsoft Entra ID', 'Microsoft Graph'],
+      infra: ['Docker Compose', 'Nginx', 'PHP-FPM', 'Supervisor', 'Filas e jobs', 'Linux', 'GitHub Actions', 'OpenSSL'],
+    },
     {
       name: 'SGI — Plataforma de Gestão Integrada',
       org: 'Sistema FIEMT',
       period: '11/2023 – 09/2025',
+      commits: 499,
       summary:
         'Integrei a API REST da Unimed ao SGI (Laravel 9/PHP 8): token Bearer em cache, jobs em filas Redis/Horizon ' +
         'com retentativas e agendamentos que importam contratos, titulares, dependentes, faturas, mensalidades e ' +
@@ -329,6 +366,7 @@ export default {
       name: 'Plataforma de automação e IA (n8n)',
       org: 'Sistema FIEMT',
       period: '05/2025 – 09/2026',
+      commits: 120,
       summary:
         'Implantei e mantenho o n8n self-hosted em Docker Swarm sobre Linux, com Traefik v3 como proxy reverso (TLS ' +
         'com certificado coringa, rotas interna e externa e métricas restritas por IP), PostgreSQL 17 com pgvector e ' +
@@ -343,6 +381,7 @@ export default {
       name: 'Tili — Inteligência Legislativa',
       org: 'Plataforma multi-tenant',
       period: '02/2024 – 03/2026',
+      commits: 379,
       summary:
         'Atuei na infraestrutura do Tili, plataforma multi-tenant de inteligência legislativa em Laravel e Vue ' +
         '3/Inertia. Containerizei a aplicação com Docker Compose (Nginx, PHP-FPM 8.3, MySQL 8, Redis e Supervisor), ' +
@@ -355,6 +394,7 @@ export default {
       name: 'Atualização Cadastral de Colaboradores',
       org: 'Sistema FIEMT',
       period: '02/2024 – 03/2025',
+      commits: 300,
       summary:
         'Desenvolvi do zero o sistema em que os colaboradores atualizam dados pessoais e formações, com aprovação do ' +
         'RH (Laravel 9, Livewire, Tailwind, MySQL). Integrei o login ao Active Directory via LDAP (LdapRecord), li ' +
@@ -369,6 +409,7 @@ export default {
       name: 'Aprender — Gestão de Programa Educacional',
       org: 'Sistema FIEMT',
       period: '08/2025 – 10/2025',
+      commits: 281,
       summary:
         'Desenvolvi a plataforma Aprender (Laravel 9, Livewire, Vite, MySQL) para gestão de um programa educacional: ' +
         'trilhas formativas, escolas parceiras, matrizes curriculares, editais e módulos com upload de arquivos. ' +
@@ -383,6 +424,7 @@ export default {
       name: 'Corporate Login — SSO com Microsoft Entra ID',
       org: 'Biblioteca PHP (Composer)',
       period: '10/2026',
+      commits: 5,
       summary:
         'Criei um pacote Composer de Single Sign-On com Microsoft Entra ID (OpenID Connect/OAuth 2.0 com PKCE), com ' +
         'validação de ID Token JWT via JWKS, consulta de perfil pelo Microsoft Graph e provisionamento automatizado ' +
@@ -396,6 +438,7 @@ export default {
       name: 'ADSentinel — Auditoria do Active Directory',
       org: 'Sistema FIEMT',
       period: '08/2026 – 10/2026',
+      commits: 17,
       summary:
         'Desenvolvi em Python uma ferramenta de auditoria do Active Directory que lê o log de segurança dos Domain ' +
         'Controllers (pywin32/Event Log API via RPC ou PowerShell remoto via WinRM) e extrai eventos de criação, ' +
@@ -409,6 +452,7 @@ export default {
       name: 'Portal do Sistema FIEMT',
       org: 'Sistema FIEMT',
       period: '02/2024 – 09/2026',
+      commits: 82,
       summary:
         'Atuei no portal institucional do Sistema FIEMT (Laravel/PHP, MySQL). Integrei via API REST (Guzzle) o ' +
         'formulário de não similaridade do CIN ao SGI, com upload de arquivos, fila de envio e mapeamento de dados. ' +
@@ -423,6 +467,7 @@ export default {
       name: 'CMS Corporativo',
       org: 'Sistema FIEMT',
       period: '11/2023 – 07/2025',
+      commits: 120,
       summary:
         'Mantive e evoluí o CMS corporativo em PHP 8 e MySQL (PDO), que alimenta os portais institucionais via API. ' +
         'Desenvolvi melhorias nos módulos de categorias, links, FAQ, serviços, downloads e eventos, regras para os ' +
@@ -437,6 +482,7 @@ export default {
       name: 'Portal de Carreiras',
       org: 'Sistema FIEMT',
       period: '12/2023 – 04/2025',
+      commits: 111,
       summary:
         'Desenvolvi do zero o portal de carreiras em Laravel 8 e Livewire, com Bootstrap 5 e SASS, integrando a API ' +
         'REST da Gupy para listar vagas com filtros por departamento, local e modalidade (híbrido/remoto) e ' +
@@ -451,6 +497,7 @@ export default {
       name: 'Portais da Transparência SESI e SENAI MT',
       org: 'SESI e SENAI MT',
       period: '11/2023 – 06/2025',
+      commits: 89,
       summary:
         'Desenvolvi e refatorei os módulos dos Portais da Transparência do SESI e do SENAI MT (Laravel/PHP): ' +
         'orçamento e execução orçamentária, contratos, licitações, integridade, demonstrações contábeis, legislação ' +
@@ -465,6 +512,7 @@ export default {
       name: 'Moodle — Infraestrutura do AVA',
       org: 'Sistema FIEMT',
       period: '04/2024 – 09/2026',
+      commits: 33,
       summary:
         'Montei o ambiente Docker inicial do Moodle (Nginx, PHP-FPM 8.0 a 8.3 e MySQL) e depois assumi a stack de ' +
         'produção do Moodle 4.2: PHP 8.1-FPM em Debian com extensões GD, intl, LDAP e OPcache, Nginx como proxy ' +
@@ -479,6 +527,7 @@ export default {
       name: 'Cantina — Pedidos de Autoatendimento',
       org: 'Sistema FIEMT',
       period: '07/2024 – 08/2024',
+      commits: 119,
       summary:
         'Desenvolvi um sistema de pedidos para cantina corporativa em Laravel 10, Livewire 3/Volt, Tailwind e MySQL, ' +
         'com carrinho de compras, finalização de pedidos e impressão de comprovantes em impressora térmica via ' +
@@ -492,6 +541,7 @@ export default {
       name: 'SINAES-MT — Avaliação Institucional',
       org: 'Ensino superior',
       period: '11/2024',
+      commits: 43,
       summary:
         'Atuei no sistema de avaliação institucional (SINAES) em Laravel 11, Inertia.js, Vue 3 e MySQL. Desenvolvi a ' +
         'integração REST com o sistema de gestão educacional para importar unidades, cursos e alunos por jobs em ' +
@@ -505,6 +555,7 @@ export default {
       name: 'Gestão de Treinamentos',
       org: 'Sistema FIEMT',
       period: '04/2025 – 06/2025',
+      commits: 61,
       summary:
         'Configurei o CI/CD do sistema de gestão de treinamentos: GitHub Actions compilando o backend Java 21/Spring ' +
         'Boot 3.3 (JPA, Spring Security com JWT, OpenAPI, MySQL) via Maven e publicando no Azure App Service, e ' +
@@ -518,6 +569,7 @@ export default {
       name: 'Vênus — Estornos e Reclassificações Contábeis',
       org: 'Sistema FIEMT',
       period: '11/2023 – 04/2025',
+      commits: 15,
       summary:
         'No Vênus, aplicação React (Material UI e Ant Design) para estornos e reclassificações contábeis e de folha, ' +
         'implementei o consumo da API REST do TOTVS Protheus com OAuth2 (token Bearer via interceptor do axios), ' +
@@ -531,6 +583,7 @@ export default {
       name: 'Portais SENAI, FATEC SENAI e IEL MT',
       org: 'SENAI, FATEC e IEL MT',
       period: '11/2023 – 09/2026',
+      commits: 71,
       summary:
         'Atuei nos portais do SENAI, da FATEC SENAI e do IEL MT (Laravel/PHP), que reúnem dados de MySQL, SQL Server ' +
         '(visões do TOTVS RM) e Oracle e integram a API de vagas da Empregare. Migrei projetos do Laravel 7 para 8 e ' +
@@ -545,6 +598,7 @@ export default {
       name: 'Eficientômetro do CSC',
       org: 'Sistema FIEMT',
       period: '05/2025',
+      commits: 3,
       summary:
         'Criei o Eficientômetro do CSC, dashboard web responsivo em React e TypeScript (Vite, Tailwind, shadcn/ui, ' +
         'Recharts) que apresenta as reduções de custos e de horas obtidas pelo Centro de Serviços Compartilhados, ' +
