@@ -1,9 +1,8 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
-// A lateral tem largura relativa (25%), então a onda é recalculada pela largura real dela.
 const svg = ref(null)
-const width = ref(300) // largura da lateral (px)
+const width = ref(300)
 let observer
 
 onMounted(() => {
@@ -16,27 +15,21 @@ onMounted(() => {
 })
 onBeforeUnmount(() => observer?.disconnect())
 
-// Altura total da onda — mantenha em sincronia com lg:pt-[278px] / top-[278px] em AppSidebar.vue
 const HEIGHT = 278
 
-// Foto: canto em (40, 18), 176px → centro (128, 106), raio externo 88.
-// A área escura contorna a foto com um arco concêntrico de raio R (margem de ~14px no anel).
 const CX = 128
 const CY = 106
 const R = 102
-const BAND_TOP = CY + R // 208: início da faixa clara abaixo da foto
-const BAND_BOTTOM = BAND_TOP + 32 // 240: fim da faixa clara
-const BAND_LEFT = 90 // ponta arredondada da faixa clara: começa embaixo da foto, puxada para a direita
+const BAND_TOP = CY + R
+const BAND_BOTTOM = BAND_TOP + 32
+const BAND_LEFT = 90
 
-// Ponto do topo onde a curva começa a descer em direção à foto (abre suavemente no topo)
 const top = computed(() => Math.min(width.value, 300))
 
-// Topo → desce colado à foto (arco) → faixa clara abaixo dela → canto arredondado
-// exatamente na borda direita da lateral (que acompanha os 25% da tela).
 const path = computed(() => {
   const w = width.value
   const t = top.value
-  const right = CX + R // 230: lado direito do arco
+  const right = CX + R
   const c1 = Math.max(t - 50, right + 6)
   return [
     `M0 0 H${t}`,
@@ -52,8 +45,6 @@ const path = computed(() => {
 })
 </script>
 
-<!-- Onda do topo (desktop): área escura envolvendo a foto, com a faixa clara abaixo.
-     Fica inteira dentro da coluna da lateral (que recorta o que passar da borda). -->
 <template>
   <svg
     ref="svg"

@@ -1,8 +1,6 @@
 <script setup>
 import { computed } from 'vue'
 
-// Nuvem de palavras clicável. words: ['Texto', ...] ou [{ name, weight (1 a 5), match? }, ...]
-// selected: palavra selecionada | counts: { nome: nº de projetos } (palavras sem projetos não são clicáveis)
 const props = defineProps({
   words: { type: Array, required: true },
   label: { type: String, default: 'Principais tecnologias' },
@@ -16,7 +14,6 @@ const isClickable = (word) => countOf(word) === null || countOf(word) > 0
 
 const DEFAULT_WEIGHT = 2
 
-// Tamanho e cor por peso (1 = discreto … 5 = principal; 6 = destaque máximo, fica no centro da nuvem)
 const STYLES = {
   1: 'text-sm font-medium text-fg/50',
   2: 'text-base font-medium text-fg/65',
@@ -32,8 +29,6 @@ const normalize = (w) => {
   return { ...item, name: item.name, weight }
 }
 
-// Distribuição "do centro para fora": as mais importantes ficam no meio,
-// as demais vão se alternando à esquerda e à direita.
 const cloud = computed(() => {
   const sorted = props.words.map(normalize).sort((a, b) => b.weight - a.weight)
   const arranged = []
@@ -41,8 +36,6 @@ const cloud = computed(() => {
   return arranged
 })
 
-// Movimento: cada palavra flutua no próprio ritmo (valores determinísticos, sem "pulos" a cada render).
-// Palavras maiores se movem um pouco menos, para a nuvem continuar legível.
 const motion = (word, i) => {
   const seed = (i * 37 + word.name.length * 13) % 100
   return {
@@ -57,8 +50,6 @@ const motion = (word, i) => {
 
 <template>
   <div class="relative">
-    <!-- Contorno em formato de nuvem: estica com o conteúdo (preserveAspectRatio="none");
-         vector-effect mantém a espessura da linha constante mesmo esticado. -->
     <svg
       class="cloud-shape pointer-events-none absolute inset-0 size-full"
       viewBox="0 0 800 300"
@@ -88,7 +79,6 @@ const motion = (word, i) => {
       />
     </svg>
 
-    <!-- Palavras (com folga para não encostar nas ondulações da nuvem) -->
     <ul
       :aria-label="label"
       class="relative flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-12 pt-14 pb-12 sm:gap-x-7 sm:px-20 sm:pt-16 sm:pb-14"
@@ -116,8 +106,6 @@ const motion = (word, i) => {
 </template>
 
 <style scoped>
-/* Entrada em sequência + flutuação contínua (usa `translate`/`rotate`, então o zoom do hover,
-   que usa `scale`, continua funcionando junto) */
 .cloud-word {
   animation:
     cloud-appear 0.6s ease-out var(--appear-delay) backwards,
@@ -142,7 +130,6 @@ const motion = (word, i) => {
   }
 }
 
-/* A nuvem "respira" devagar */
 .cloud-shape {
   transform-origin: center;
   animation: cloud-breathe 7s ease-in-out infinite alternate;

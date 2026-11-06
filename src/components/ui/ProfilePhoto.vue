@@ -3,22 +3,21 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 const props = defineProps({
   src: { type: String, required: true },
-  // Imagem alternativa, exibida quando `swapped` for true (ou ao tocar, em telas sem mouse)
+
   hoverSrc: { type: String, default: '' },
   swapped: { type: Boolean, default: false },
   alt: { type: String, default: '' },
 })
 
-const MAX_TILT = 14 // graus
-const PARALLAX = 6 // px de deslocamento da foto dentro do anel
+const MAX_TILT = 14
+const PARALLAX = 6
 
 const el = ref(null)
-const tilt = ref({ x: 0, y: 0 }) // -1 a 1
+const tilt = ref({ x: 0, y: 0 })
 const hovered = ref(false)
 let enabled = false
 let frame = 0
 
-// A foto "olha" para o cursor em qualquer ponto da página
 const onPointerMove = (e) => {
   if (!el.value || frame) return
   frame = requestAnimationFrame(() => {
@@ -37,7 +36,6 @@ const onPointerMove = (e) => {
 const reset = () => (tilt.value = { x: 0, y: 0 })
 
 onMounted(() => {
-  // Só em dispositivos com mouse e sem preferência por menos movimento
   enabled =
     window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
     !window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -65,7 +63,6 @@ const imageStyle = computed(() => ({
     ` scale(${hovered.value ? 1.18 : 1.1})`,
 }))
 
-// Mouse sobre a foto: zoom e brilho. Toque: cada toque alterna a imagem.
 const onEnter = (e) => {
   if (e.pointerType !== 'touch') hovered.value = true
 }
@@ -79,7 +76,6 @@ const onTap = (e) => {
 
 const showAlt = computed(() => Boolean(props.hoverSrc) && (props.swapped || tapped.value))
 
-// Reflexo de luz que acompanha o cursor
 const shineStyle = computed(() => ({
   background: `radial-gradient(circle at ${50 + tilt.value.x * 40}% ${50 + tilt.value.y * 40}%, rgb(255 255 255 / 0.35), transparent 60%)`,
 }))
@@ -103,7 +99,6 @@ const shineStyle = computed(() => ({
         :class="showAlt ? 'opacity-0' : 'opacity-100'"
         :style="imageStyle"
       />
-      <!-- Imagem alternativa: sobreposta e revelada com fade -->
       <img
         v-if="hoverSrc"
         :src="hoverSrc"

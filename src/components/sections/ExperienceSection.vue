@@ -3,18 +3,15 @@ import { ref, computed } from 'vue'
 import MainSection from '../ui/MainSection.vue'
 import ExperienceItem from './ExperienceItem.vue'
 
-// items: experiências, da mais recente para a mais antiga
 const props = defineProps({
   items: { type: Array, required: true },
 })
 
-// Itens com detalhes (description/highlights/closing) ganham o botão "Ver detalhes"
 const hasDetails = (job) =>
   [].concat(job.description ?? []).length > 0 || job.highlights?.length > 0 || Boolean(job.closing)
 const withDetails = computed(() => props.items.map(hasDetails))
 const anyDetails = computed(() => withDetails.value.some(Boolean))
 
-// Começam todos recolhidos (o recrutador vê primeiro a versão enxuta)
 const open = ref(props.items.map(() => false))
 const toggle = (i) => (open.value[i] = !open.value[i])
 
@@ -39,7 +36,6 @@ const isCurrent = (job) => /atual/i.test(job.period)
       </button>
     </div>
 
-    <!-- Linha do tempo -->
     <ol class="relative ml-2 space-y-12 border-l-2 border-fg/15 pl-8 print:space-y-4">
       <li v-for="(job, i) in items" :key="i">
         <ExperienceItem :job="job" :current="isCurrent(job)" :open="open[i]" @toggle="toggle(i)" />

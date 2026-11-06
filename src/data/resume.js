@@ -1,12 +1,10 @@
-// Edite este arquivo com suas informações reais.
 export default {
   firstName: 'Keverson',
   lastName: 'Souza',
   role: 'Desenvolvedor Full Stack | Integrações e Automação',
   photo: 'profile.jpg',
-  photoHover: 'pen.jpg', // exibida ao passar o mouse sobre a lateral
+  photoHover: 'pen.jpg',
 
-  // Cada item é um parágrafo
   profile: [
     'Desenvolvedor Full Stack com mais de 8 anos de experiência em sistemas corporativos, integrações e automação ' +
       'de processos na federação das indústrias de Mato Grosso (SESI/SENAI). Atuo com PHP/Laravel, Vue.js, ' +
@@ -15,16 +13,9 @@ export default {
       'evoluir em arquitetura de software, cloud e DevOps.',
   ],
 
-  // Nuvem de palavras exibida abaixo do Perfil.
-  // Para adicionar uma tecnologia, inclua um item: { name: 'Nome', weight: 1 a 5 } (6 = destaque máximo, no centro)
-  // (weight define tamanho/destaque: 5 = principal; também aceita só o texto, ex.: 'Redis', que vale peso 2)
-  // Pesos revisados com base na frequência nos projetos e nas experiências.
-  // Clicar numa palavra mostra os projetos que a citam (no nome, resumo ou etiquetas).
-  // match (opcional): sinônimos usados nessa busca, quando o nome da palavra difere do texto dos projetos.
   stackCloud: [
-    // Projeto principal: peso 6 (maior palavra, no centro da nuvem)
     { name: 'Orion', weight: 6 },
-    // Núcleo (presentes na maioria dos projetos)
+
     { name: 'Laravel', weight: 5 },
     { name: 'Unimed', weight: 3 },
     { name: 'PHP', weight: 5 },
@@ -38,7 +29,7 @@ export default {
     { name: 'TOTVS Protheus', weight: 4 },
     { name: 'TOTVS RM', weight: 4 },
     { name: 'Redis', weight: 4 },
-    // Frequentes
+
     { name: 'Nginx', weight: 3 },
     { name: 'Apache', weight: 3 },
     { name: 'PHP-FPM', weight: 3 },
@@ -59,7 +50,7 @@ export default {
     { name: 'TypeScript', weight: 3 },
     { name: 'Python', weight: 3 },
     { name: 'GitHub Actions', weight: 3 },
-    // Pontuais
+
     { name: 'Docker Swarm', weight: 2 },
     { name: 'Traefik', weight: 2 },
     { name: 'Supervisor', weight: 2 },
@@ -116,11 +107,6 @@ export default {
     { icon: 'book', label: 'Leitura' },
   ],
 
-  // Da mais recente para a mais antiga.
-  // Versão enxuta (sempre visível e no PDF):
-  //   summary: tópicos curtos | tags: stack principal (6 a 9 tecnologias)
-  // Detalhes (botão "Ver detalhes", fora do PDF):
-  //   description: parágrafos | highlights: destaques | closing: parágrafo final (todos opcionais)
   experience: [
     {
       company: 'SESI - Serviço Social da Indústria (Mato Grosso)',
@@ -311,7 +297,6 @@ export default {
     },
   ],
 
-  // description é opcional
   education: [
     {
       institution: 'Instituto Cuiabá de Ensino e Cultura (ICEC)',
@@ -320,11 +305,6 @@ export default {
     },
   ],
 
-  // Projetos — exibidos abaixo da nuvem de tecnologias (clicar numa palavra filtra os projetos).
-  // { name, org?, period?, commits?, featured?, summary, stack?: [], integrations?: [], infra?: [] }
-  // Levantados a partir dos commits dos últimos 3 anos (desde 11/2023).
-  // commits: commits próprios no período, sem contar merges (soma dos repositórios quando o card agrupa vários).
-  // summary: até 500 caracteres; o projeto em destaque (featured: true) ocupa a largura toda e pode ter texto maior.
   projects: [
     {
       name: 'Orion — Integração RM × Active Directory e SSO',
@@ -338,7 +318,7 @@ export default {
         place: 'Belém-PA, 2026',
         detail: 'Projeto Portal Orion: case mais votado, com 39,53% dos votos.',
       },
-      // Arquivos em public/projects/orion/
+
       media: [
         {
           type: 'image',
@@ -642,7 +622,5 @@ export default {
     },
   ],
 
-  // Cursos — a seção só aparece quando houver ao menos um item.
-  // { name, institution, year?, hours?, url? } (url: link do certificado, opcional)
   courses: [],
 }

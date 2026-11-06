@@ -1,9 +1,6 @@
 <script setup>
 import MediaGallery from './MediaGallery.vue'
 
-// Cartão de projeto. Campos opcionais: award (premiação), media (fotos/vídeos), links (externos).
-// highlight: função que diz se uma etiqueta corresponde à tecnologia selecionada.
-// featured: projeto em destaque (borda dourada, selo "Projeto principal"; o pai o faz ocupar a largura toda).
 defineProps({
   project: { type: Object, required: true },
   highlight: { type: Function, default: () => false },
@@ -42,7 +39,6 @@ const GROUPS = [
         <p class="text-sm text-fg/60">{{ [project.org, project.period].filter(Boolean).join(' · ') }}</p>
       </div>
 
-      <!-- Commits próprios no período (sem merges) -->
       <span
         v-if="project.commits"
         class="inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold"
@@ -57,13 +53,11 @@ const GROUPS = [
       </span>
     </header>
 
-    <!-- Premiação -->
     <div
       v-if="project.award"
       class="mb-4 flex items-start gap-3 rounded-xl border border-gold/40 bg-gold/10 px-4 py-3"
     >
       <span class="grid size-10 shrink-0 place-items-center rounded-full bg-gold text-ink shadow" aria-hidden="true">
-        <!-- Troféu -->
         <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4ZM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3" />
         </svg>
@@ -81,7 +75,6 @@ const GROUPS = [
       {{ project.summary }}
     </p>
 
-    <!-- Fotos e vídeos -->
     <MediaGallery
       v-if="project.media?.length"
       :items="project.media"
@@ -89,7 +82,6 @@ const GROUPS = [
       class="mt-5"
     />
 
-    <!-- Links externos -->
     <ul v-if="project.links?.length" class="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">
       <li v-for="link in project.links" :key="link.href">
         <a

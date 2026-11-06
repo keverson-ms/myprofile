@@ -1,7 +1,6 @@
 <script setup>
 defineProps({ name: { type: String, required: true } })
 
-// Ícones em traço (estilo outline), viewBox 24x24
 const icons = {
   user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0',
   briefcase: 'M4 8h16v11H4zM9 8V5h6v3M4 13h16',

@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import AppIcon from '../ui/AppIcon.vue'
 
-// Degradê + seta (desktop), visíveis só quando há conteúdo escondido naquela direção
 const props = defineProps({
   up: { type: Boolean, default: false },
   down: { type: Boolean, default: false },

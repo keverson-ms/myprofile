@@ -2,9 +2,6 @@
 import { computed, useId } from 'vue'
 import TagList from '../ui/TagList.vue'
 
-// job: { company, period, position, summary?, tags?, description?, highlights?, closing? }
-// Versão enxuta (sempre visível e no PDF): summary + tags.
-// Detalhes (botão "Ver detalhes", fora do PDF): description + highlights + closing.
 const props = defineProps({
   job: { type: Object, required: true },
   open: { type: Boolean, default: false },
@@ -14,7 +11,6 @@ const emit = defineEmits(['toggle'])
 
 const detailsId = useId()
 
-// description aceita texto único ou lista de parágrafos
 const paragraphs = computed(() => [].concat(props.job.description ?? []))
 const hasDetails = computed(
   () => paragraphs.value.length > 0 || props.job.highlights?.length > 0 || Boolean(props.job.closing),
@@ -24,22 +20,18 @@ defineExpose({ hasDetails })
 </script>
 
 <template>
-  <!-- print-keep: a versão enxuta é curta, então cada experiência fica inteira na mesma página do PDF -->
   <article class="print-keep relative">
-    <!-- Marcador na linha do tempo (o emprego atual em destaque) -->
     <span
       class="absolute top-1.5 -left-[2.4rem] size-4 rounded-full border-4 border-paper ring-2"
       :class="current ? 'bg-gold ring-gold/40 shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-gold)_20%,transparent)]' : 'bg-fg/40 ring-fg/15'"
       aria-hidden="true"
     />
 
-    <!-- Cabeçalho do item: não se separa do início do texto na quebra de página -->
     <div class="break-after-avoid">
       <p class="text-sm text-fg/60">{{ job.company }} / {{ job.period }}</p>
       <h3 class="text-lg font-bold">{{ job.position }}</h3>
     </div>
 
-    <!-- Resumo (versão enxuta) -->
     <ul v-if="job.summary?.length" class="mt-2 space-y-1.5 text-[15px] leading-relaxed text-fg/80">
       <li v-for="(item, i) in job.summary" :key="i" class="print-keep flex gap-3">
         <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-gold" />
@@ -50,7 +42,6 @@ defineExpose({ hasDetails })
     <TagList v-if="job.tags?.length" :tags="job.tags" class="mt-4" />
 
     <template v-if="hasDetails">
-      <!-- Detalhes completos (animação via grid-template-rows 0fr → 1fr). Fora do PDF. -->
       <div
         :id="detailsId"
         class="grid transition-[grid-template-rows] duration-500 ease-in-out print:hidden"

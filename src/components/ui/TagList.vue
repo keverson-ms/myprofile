@@ -5,7 +5,6 @@ defineProps({
 </script>
 
 <template>
-  <!-- No PDF: etiquetas só com contorno (economiza tinta) e nunca cortadas entre páginas -->
   <ul class="print-keep flex flex-wrap gap-2 print:gap-1.5">
     <li
       v-for="tag in tags"

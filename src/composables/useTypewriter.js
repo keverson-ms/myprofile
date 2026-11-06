@@ -1,8 +1,5 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-// Efeito de digitação em loop: digita → espera `holdTime` → apaga → pausa → digita de novo.
-// `count` é quantos caracteres estão visíveis; `done` fica true enquanto o texto está completo.
-// Quem prefere menos movimento (prefers-reduced-motion) vê o texto completo, sem loop.
 export function useTypewriter(
   length,
   { speed = 110, deleteSpeed = 55, startDelay = 500, holdTime = 5000, restartDelay = 600, loop = true } = {},
@@ -11,7 +8,6 @@ export function useTypewriter(
   const done = ref(false)
   let timer
 
-  // Pequena variação no ritmo para parecer digitação humana
   const jitter = (ms) => ms * (0.7 + Math.random() * 0.6)
 
   const type = () => {

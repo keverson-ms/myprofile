@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: "Raleway", ui-sans-serif, system-ui, sans-serif;
-  /* ink: superfícies escuras (lateral, ícones, etiquetas) | fg: textos e linhas sobre o fundo claro */
+
   --color-ink: #3d3d3d;
   --color-ink-dark: #2b2b2b;
   --color-paper: #f1f1f1;
@@ -10,7 +10,6 @@
   --color-fg: var(--color-ink);
 }
 
-/* Rolagem sem barra visível (usada nos cartões da lateral) */
 @utility scrollbar-none {
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -18,8 +17,6 @@
   }
 }
 
-/* Paletas alternativas — a padrão (Clássico) é a definida no @theme acima.
-   Mantenha os nomes em sincronia com src/composables/useTheme.js */
 :root[data-theme="navy"] {
   --color-ink: #1f3a5f;
   --color-ink-dark: #132a46;
@@ -34,8 +31,6 @@
   --color-gold: #c4875a;
 }
 
-/* Modo escuro: fundo do conteúdo e da lateral pretos, textos claros.
-   Combina com qualquer paleta (mantém o destaque e um leve tom da cor da paleta). */
 :root[data-mode="dark"] {
   color-scheme: dark;
   --color-ink: #000000;
@@ -56,15 +51,12 @@
   --color-paper: #101b17;
 }
 
-/* Transição suave ao trocar de paleta */
 .theme-transition,
 .theme-transition * {
   transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, fill 0.4s ease,
     stroke 0.4s ease !important;
 }
 
-/* Impressão / PDF (A4): só o essencial, fundo branco e boa distribuição entre páginas.
-   Os ajustes de layout de cada componente ficam nas classes print: dos próprios componentes. */
 @media print {
   @page {
     size: A4;
@@ -77,10 +69,8 @@
     print-color-adjust: exact;
   }
 
-  /* Reduz a escala para caber mais conteúdo por página sem perder legibilidade */
   body { zoom: 0.7; }
 
-  /* VLibras (o widget cria elementos próprios com CSS forte; o #app dá peso suficiente para vencer) */
   #app ~ [vw],
   #app ~ [vw] *,
   #vlibras-access-wrapper,
@@ -94,7 +84,6 @@
     visibility: hidden !important;
   }
 
-  /* Papel sempre no modo claro (mesmo se a impressão vier por outro caminho que não o botão) */
   :root[data-mode="dark"] {
     color-scheme: light;
     --color-ink: #3d3d3d;
@@ -113,9 +102,6 @@
     --color-paper: #f2f5f2;
   }
 
-  /* Quebras de página: título nunca fica sozinho no pé da página; blocos CURTOS não são cortados.
-     Blocos longos (cada experiência inteira) podem quebrar entre páginas — senão seriam empurrados
-     inteiros para a página seguinte, deixando grandes espaços em branco. */
   h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
   p { orphans: 3; widows: 3; }
   .print-keep { break-inside: avoid; page-break-inside: avoid; }

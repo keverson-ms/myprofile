@@ -5,7 +5,6 @@ import StackCloud from '../ui/StackCloud.vue'
 import ProjectCard from '../ui/ProjectCard.vue'
 import { projectMatches, tagMatches } from '../../composables/useProjectMatcher.js'
 
-// paragraphs: parágrafos do perfil | stack: palavras da nuvem | projects: projetos (filtrados pela nuvem)
 const props = defineProps({
   paragraphs: { type: Array, required: true },
   stack: { type: Array, default: () => [] },
@@ -15,11 +14,14 @@ const props = defineProps({
 const ALL = '__all__'
 const selected = ref(null)
 const panel = ref(null)
+const featuredEl = ref(null)
 
 const words = computed(() => props.stack.map((w) => (typeof w === 'string' ? { name: w } : w)))
 const selectedWord = computed(() => words.value.find((w) => w.name === selected.value) ?? null)
 
-// Quantos projetos cada palavra encontra (palavras sem projetos ficam não clicáveis)
+const featured = computed(() => props.projects.find((p) => p.featured) ?? null)
+const others = computed(() => props.projects.filter((p) => !p.featured))
+
 const counts = computed(() =>
   props.projects.length
     ? Object.fromEntries(words.value.map((w) => [w.name, props.projects.filter((p) => projectMatches(p, w)).length]))
@@ -27,20 +29,29 @@ const counts = computed(() =>
 )
 
 const visibleProjects = computed(() => {
-  if (selected.value === ALL) return props.projects
+  if (selected.value === ALL) return others.value
   if (!selectedWord.value) return []
-  return props.projects.filter((p) => projectMatches(p, selectedWord.value))
+  return others.value.filter((p) => projectMatches(p, selectedWord.value))
 })
 
+const featuredMatches = computed(
+  () => Boolean(featured.value && selectedWord.value && projectMatches(featured.value, selectedWord.value)),
+)
+
 const highlight = (tag) => (selectedWord.value ? tagMatches(tag, selectedWord.value) : false)
+
+const scrollTo = (el) => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  el?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' })
+}
 
 const select = async (name) => {
   selected.value = name
   if (!name) return
-  // Leva o painel de projetos para a vista
   await nextTick()
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  panel.value?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' })
+
+  if (featuredMatches.value && !visibleProjects.value.length) scrollTo(featuredEl.value)
+  else scrollTo(panel.value)
 }
 </script>
 
@@ -56,23 +67,36 @@ const select = async (name) => {
       </p>
     </div>
 
-    <!-- Nuvem de tecnologias + projetos (fora do PDF: as stacks já aparecem em cada experiência) -->
-    <div v-if="stack.length" class="mt-8 print:hidden">
+    <div v-if="featured" ref="featuredEl" class="mt-8 scroll-mt-28 print:hidden">
+      <ProjectCard
+        :project="featured"
+        :highlight="highlight"
+        class="transition-shadow duration-300"
+        :class="{ 'ring-2 ring-gold': featuredMatches }"
+      />
+    </div>
+
+    <div v-if="stack.length" class="mt-10 print:hidden">
       <StackCloud :words="stack" :selected="selected === ALL ? null : selected" :counts="counts" @select="select" />
 
       <div v-if="projects.length" ref="panel" class="mt-6 scroll-mt-28">
-        <!-- Barra de status / ações -->
         <div class="mb-5 flex flex-wrap items-center justify-center gap-3 text-center text-sm text-fg/70" aria-live="polite">
           <template v-if="selected === ALL">
             <span>
-              Todos os <strong class="text-fg">{{ projects.length }} projetos</strong>
+              Todos os <strong class="text-fg">{{ others.length }} projetos</strong>
+              <template v-if="featured"> (além do {{ featured.name.split(' — ')[0] }}, em destaque acima)</template>
             </span>
           </template>
           <template v-else-if="selected">
-            <span>
+            <span v-if="!visibleProjects.length && featuredMatches">
+              Somente o <strong class="text-gold">{{ featured.name.split(' — ')[0] }}</strong>, em destaque acima, usa
+              <strong class="text-gold">{{ selected }}</strong>
+            </span>
+            <span v-else>
               <strong class="text-fg">{{ visibleProjects.length }}</strong>
               {{ visibleProjects.length === 1 ? 'projeto' : 'projetos' }} com
               <strong class="text-gold">{{ selected }}</strong>
+              <template v-if="featuredMatches"> + {{ featured.name.split(' — ')[0] }}, em destaque acima</template>
             </span>
           </template>
           <span v-else>Clique em uma tecnologia da nuvem para ver os projetos em que atuei com ela.</span>
@@ -95,7 +119,6 @@ const select = async (name) => {
           </button>
         </div>
 
-        <!-- Projetos -->
         <TransitionGroup
           tag="ul"
           class="relative grid gap-5 md:grid-cols-2"
@@ -104,14 +127,12 @@ const select = async (name) => {
           leave-active-class="transition duration-150 absolute opacity-0"
           move-class="transition duration-300"
         >
-          <!-- O projeto em destaque (featured) ocupa a largura toda -->
-          <li v-for="project in visibleProjects" :key="project.name" :class="{ 'md:col-span-2': project.featured }">
+          <li v-for="project in visibleProjects" :key="project.name">
             <ProjectCard :project="project" :highlight="highlight" />
           </li>
         </TransitionGroup>
 
-        <!-- Nota sobre a contagem de commits, com um ponto dourado pulsando para chamar a atenção -->
-        <p v-if="visibleProjects.length" class="mt-5 flex justify-center">
+        <p class="mt-5 flex justify-center">
           <span
             class="commits-note inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-gold/5 px-4 py-1.5 text-xs font-medium text-fg/80"
           >
@@ -128,7 +149,6 @@ const select = async (name) => {
 </template>
 
 <style scoped>
-/* A borda da nota "respira" com um brilho dourado */
 .commits-note {
   animation: note-glow 2.4s ease-in-out infinite;
 }

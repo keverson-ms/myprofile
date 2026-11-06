@@ -1,7 +1,6 @@
 <script setup>
 import SidebarCard from '../ui/SidebarCard.vue'
 
-// skills: [{ name, level }] — level de 1 a 5 estrelas
 defineProps({
   skills: { type: Array, required: true },
 })

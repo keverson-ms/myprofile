@@ -1,7 +1,6 @@
 <script setup>
 import MainSection from '../ui/MainSection.vue'
 
-// items: [{ institution, period, course, description? }]
 defineProps({
   items: { type: Array, required: true },
 })

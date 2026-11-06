@@ -2,7 +2,6 @@
 import AppIcon from '../ui/AppIcon.vue'
 import SidebarCard from '../ui/SidebarCard.vue'
 
-// items: [{ icon, label, handle, href }] | owner: usado no texto para leitores de tela
 defineProps({
   items: { type: Array, required: true },
   owner: { type: String, default: '' },

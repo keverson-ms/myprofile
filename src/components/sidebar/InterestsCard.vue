@@ -2,7 +2,6 @@
 import AppIcon from '../ui/AppIcon.vue'
 import SidebarCard from '../ui/SidebarCard.vue'
 
-// items: [{ icon, label }]
 defineProps({
   items: { type: Array, required: true },
 })

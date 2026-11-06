@@ -1,11 +1,8 @@
 <script setup>
 import { useTheme } from '../../composables/useTheme.js'
 
-// Céu estrelado de fundo, visível apenas no modo escuro.
-// Fica fixo atrás do conteúdo (que rola por cima) e não captura cliques.
 const { dark } = useTheme()
 
-// Gerador pseudoaleatório com semente: as estrelas ficam sempre nas mesmas posições
 function mulberry32(seed) {
   return () => {
     seed |= 0
@@ -25,7 +22,7 @@ const stars = Array.from({ length: STAR_COUNT }, () => {
     x: `${(random() * 100).toFixed(2)}%`,
     y: `${(random() * 100).toFixed(2)}%`,
     r: big ? 1.3 + random() * 0.8 : 0.4 + random() * 0.8,
-    accent: random() > 0.88, // algumas na cor de destaque da paleta
+    accent: random() > 0.88,
     delay: `${(random() * 6).toFixed(2)}s`,
     duration: `${(2.5 + random() * 4).toFixed(2)}s`,
   }
@@ -53,7 +50,6 @@ const stars = Array.from({ length: STAR_COUNT }, () => {
         />
       </svg>
 
-      <!-- Estrelas cadentes ocasionais -->
       <span class="shooting-star" style="top: 12%; left: 55%; animation-delay: 3s" />
       <span class="shooting-star" style="top: 38%; left: 85%; animation-delay: 11s" />
     </div>
@@ -70,7 +66,6 @@ const stars = Array.from({ length: STAR_COUNT }, () => {
   to { opacity: 0.9; }
 }
 
-/* Risco de luz que atravessa o céu na diagonal, a cada ~16s */
 .shooting-star {
   position: absolute;
   width: 110px;

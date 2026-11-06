@@ -5,10 +5,8 @@ import { useSidebar } from './composables/useSidebar.js'
 import UnderConstruction from './components/ui/UnderConstruction.vue'
 import StarryBackground from './components/ui/StarryBackground.vue'
 
-// Aviso "Em construção" (fechável). Mude para false para não exibir.
 const showUnderConstruction = ref(true)
 
-// Lateral aberta/fechada: controla as colunas do grid no desktop
 const { open: sidebarOpen } = useSidebar()
 
 import PrintButton from './components/ui/PrintButton.vue'
@@ -31,14 +29,10 @@ import CoursesSection from './components/sections/CoursesSection.vue'
 </script>
 
 <template>
-  <!-- Celular/tablet: coluna única (lateral em cima, conteúdo embaixo).
-       Desktop: grid de 2 colunas — lateral 25% | conteúdo 75%. Com a lateral fechada, 0% | 100%
-       (a troca de colunas é animada). Altura da tela, sem rolagem da página: só o <main> rola. -->
   <div
     class="relative flex min-h-screen flex-col bg-paper font-sans text-fg lg:grid lg:h-screen lg:overflow-hidden lg:transition-[grid-template-columns] lg:duration-500 lg:ease-in-out print:block! print:h-auto print:min-h-0 print:overflow-visible print:bg-white"
     :class="sidebarOpen ? 'lg:grid-cols-[25%_75%]' : 'lg:grid-cols-[0%_100%]'"
   >
-    <!-- Céu estrelado (modo escuro), atrás de todo o conteúdo -->
     <StarryBackground />
 
     <UnderConstruction v-if="showUnderConstruction" @close="showUnderConstruction = false" />
@@ -51,7 +45,6 @@ import CoursesSection from './components/sections/CoursesSection.vue'
       <ContactCard :items="resume.contact" />
       <SocialCard :items="resume.social" :owner="resume.firstName" />
       <SkillsCard :skills="resume.skills" />
-      <!-- Interesses (só ícones) não entram no PDF -->
       <InterestsCard :items="resume.passions" class="print:hidden" />
     </AppSidebar>
 
@@ -66,7 +59,6 @@ import CoursesSection from './components/sections/CoursesSection.vue'
 
       <div class="space-y-16 lg:space-y-20 print:space-y-6">
 
-        <!-- Perfil + nuvem de tecnologias; clicar numa tecnologia mostra os projetos logo abaixo da nuvem -->
         <ProfileSection :paragraphs="resume.profile" :stack="resume.stackCloud" :projects="resume.projects" />
         <ExperienceSection :items="resume.experience" />
         <EducationSection :items="resume.education" />

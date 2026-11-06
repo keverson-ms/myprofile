@@ -2,12 +2,10 @@
 import AppIcon from '../ui/AppIcon.vue'
 import SidebarCard from '../ui/SidebarCard.vue'
 
-// items: [{ icon, text, href? }]
 defineProps({
   items: { type: Array, required: true },
 })
 
-// Links externos abrem em nova aba; mailto:/tel: abrem direto
 const isExternal = (href) => href.startsWith('http')
 </script>
 
@@ -25,7 +23,6 @@ const isExternal = (href) => href.startsWith('http')
           rel="noopener"
           class="wrap-break-word underline-offset-2 hover:text-gold hover:underline"
         >
-          <!-- E-mail: permite quebrar a linha logo após o @ -->
           <template v-if="item.text.includes('@')">{{ item.text.split('@')[0] }}@<wbr />{{ item.text.split('@')[1] }}</template>
           <template v-else>{{ item.text }}</template>
         </a>

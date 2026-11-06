@@ -2,12 +2,10 @@
 import MainSection from '../ui/MainSection.vue'
 import AppIcon from '../ui/AppIcon.vue'
 
-// items: [{ name, institution, year?, hours?, url? }]
 defineProps({
   items: { type: Array, required: true },
 })
 
-// Linha de detalhes: "Instituição · 2024 · 40h"
 const details = (course) =>
   [course.institution, course.year, course.hours && `${course.hours}h`].filter(Boolean).join(' · ')
 </script>

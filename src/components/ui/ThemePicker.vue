@@ -7,7 +7,6 @@ const { themes, current, setTheme, dark, toggleDark } = useTheme()
 
 <template>
   <div class="flex items-center gap-2 rounded-full bg-white/90 p-1.5 shadow-lg ring-1 ring-black/5 backdrop-blur">
-    <!-- Paletas -->
     <div role="radiogroup" aria-label="Paleta de cores" class="flex items-center gap-2">
       <button
         v-for="t in themes"
@@ -26,7 +25,6 @@ const { themes, current, setTheme, dark, toggleDark } = useTheme()
 
     <span class="h-5 w-px bg-black/15" aria-hidden="true" />
 
-    <!-- Modo claro/escuro -->
     <button
       type="button"
       :aria-pressed="dark"

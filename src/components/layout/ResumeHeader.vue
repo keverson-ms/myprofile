@@ -2,9 +2,6 @@
 import { ref } from 'vue'
 import TypedName from './TypedName.vue'
 
-// Nome (com efeito de digitação) e cargo.
-// compact: versão sobre fundo escuro (topo da lateral no celular/tablet)
-// condensed: versão reduzida do cabeçalho fixo, usada enquanto o conteúdo está rolado
 defineProps({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -13,13 +10,10 @@ defineProps({
   condensed: { type: Boolean, default: false },
 })
 
-// O cargo aparece (fade) quando o nome termina de ser digitado pela primeira vez
-// e continua visível nos ciclos seguintes (o nome apaga e redigita a cada 5s).
 const nameDone = ref(false)
 </script>
 
 <template>
-  <!-- No PDF: alinhado à esquerda, texto escuro, nome maior e cargo sempre visível -->
   <header v-if="compact" class="text-center print:text-left">
     <h1 class="text-3xl font-extrabold tracking-wide uppercase print:text-4xl">
       <TypedName
@@ -37,8 +31,6 @@ const nameDone = ref(false)
     </p>
   </header>
 
-  <!-- Fixo no topo do <main> ao rolar. O fundo se estende até as bordas do <main>
-       (sombra larga + clip-path) para o conteúdo passar por baixo sem aparecer nas laterais. -->
   <header
     v-else
     class="sticky top-0 z-10 bg-paper/85 text-center shadow-[0_0_0_100vmax_color-mix(in_srgb,var(--color-paper)_85%,transparent)] backdrop-blur-md transition-[padding] duration-300 ease-out [clip-path:inset(0_-100vmax)] print:static"
@@ -50,7 +42,6 @@ const nameDone = ref(false)
     >
       <TypedName :first-name="firstName" :last-name="lastName" last-class="text-fg" @done="nameDone = true" />
     </h1>
-    <!-- Linha decorativa: some na versão reduzida (deixa só nome + cargo, sem colidir com o seletor de paleta) -->
     <div
       class="flex items-center overflow-hidden transition-[margin,max-height,opacity] duration-300 ease-out"
       :class="condensed ? 'my-1.5 max-h-0 opacity-0' : 'my-4 max-h-4 opacity-100'"

@@ -1,14 +1,12 @@
 <script setup>
 import { ref, computed, watch, nextTick, onBeforeUnmount } from 'vue'
 
-// Galeria de mídias com visualização ampliada.
-// items: [{ type: 'image' | 'video', src, alt?, caption?, poster? }] — src relativo à pasta public/
 const props = defineProps({
   items: { type: Array, required: true },
   label: { type: String, default: 'Galeria' },
 })
 
-const current = ref(null) // índice aberto no visualizador (null = fechado)
+const current = ref(null)
 const dialog = ref(null)
 let lastFocus = null
 
@@ -48,7 +46,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
 <template>
   <div>
-    <!-- Miniaturas -->
     <ul :aria-label="label" class="grid grid-cols-2 gap-3 sm:grid-cols-3">
       <li v-for="(m, i) in items" :key="m.src">
         <button
@@ -63,7 +60,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
             decoding="async"
             class="size-full object-cover transition duration-500 group-hover:scale-105"
           />
-          <!-- Ícone de play nos vídeos -->
           <span
             v-if="m.type === 'video'"
             class="absolute inset-0 grid place-items-center bg-black/35 transition group-hover:bg-black/20"
@@ -83,7 +79,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
       </li>
     </ul>
 
-    <!-- Visualizador ampliado -->
     <Teleport to="body">
       <Transition
         enter-active-class="transition duration-200"
