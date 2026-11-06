@@ -6,11 +6,13 @@ export default {
   photoHover: 'pen.jpg',
 
   profile: [
-    'Desenvolvedor Full Stack com mais de 8 anos de experiência em sistemas corporativos, integrações e automação ' +
-      'de processos na federação das indústrias de Mato Grosso (SESI/SENAI). Atuo com PHP/Laravel, Vue.js, ' +
-      'TypeScript e Python, com forte vivência em integração de ERPs (TOTVS Protheus e RM Folha), gestão de ' +
-      'identidades (Active Directory, Microsoft Entra ID e Graph) e entrega com Docker, CI/CD e Azure. Busco ' +
-      'evoluir em arquitetura de software, cloud e DevOps.',
+    'Desenvolvedor Full Stack com mais de 8 anos no Sistema FIEMT (SESI, SENAI e IEL), especializado em integração ' +
+      'de sistemas corporativos e automação de processos. Desenvolvo em PHP/Laravel, Vue.js e Python, com APIs REST ' +
+      'e webservices SOAP que conectam ERPs (TOTVS RM e Protheus), a plataforma SoftExpert, Active Directory e ' +
+      'Microsoft Entra ID, além de ' +
+      'plataformas de marketing e recrutamento, e trabalho com consultas SQL e integração de dados em MySQL, SQL ' +
+      'Server e Oracle. Conduzo as entregas do levantamento de requisitos ao deploy em Linux, Docker e Azure. Criei o ' +
+      'Orion, eleito Melhor Case no 15º Encontro de Gestores de TI do Sistema Indústria (2026).',
   ],
 
   stackCloud: [
@@ -18,6 +20,7 @@ export default {
 
     { name: 'Laravel', weight: 5 },
     { name: 'Unimed', weight: 3 },
+    { name: 'SoftExpert', weight: 3 },
     { name: 'PHP', weight: 5 },
     { name: 'APIs REST', weight: 5, match: ['API REST', 'APIs REST', 'REST'] },
     { name: 'MySQL', weight: 4 },
@@ -40,7 +43,10 @@ export default {
     { name: 'Microsoft Entra ID', weight: 3 },
     { name: 'SSO / OpenID Connect', weight: 3, match: ['SSO', 'OpenID Connect', 'Single Sign-On'] },
     { name: 'Microsoft Graph', weight: 3 },
-    { name: 'SOAP', weight: 3 },
+    { name: 'SOAP / Webservices', weight: 3, match: ['SOAP', 'webservice', 'webservices'] },
+    { name: 'SQL', weight: 4, match: ['SQL Server', 'MySQL', 'PostgreSQL', 'Oracle', 'SQL'] },
+    { name: 'Marketing digital', weight: 2, match: ['RD Station', 'Meta Pixel', 'Mailjet', 'marketing'] },
+    { name: 'Gupy', weight: 2 },
     { name: 'Swagger / OpenAPI', weight: 3 },
     { name: 'n8n', weight: 3 },
     { name: 'Azure OpenAI', weight: 3 },
@@ -182,7 +188,7 @@ export default {
       summary: [
         'Desenvolvi e sustentei sistemas e APIs REST em Laravel, Vue.js e TypeScript, do levantamento de ' +
           'requisitos à implantação.',
-        'Integrei sistemas com Protheus, RM Folha, AD/LDAP e Microsoft Graph.',
+        'Integrei sistemas com Protheus, RM Folha, AD/LDAP e Microsoft Graph, e a API da Unimed à plataforma SoftExpert.',
         'Implantei pipelines CI/CD e ambientes com Docker e Azure.',
       ],
       description: [
@@ -365,13 +371,13 @@ export default {
       period: '11/2023 – 09/2025',
       commits: 499,
       summary:
-        'Integrei a API REST da Unimed ao SGI (Laravel 9/PHP 8): token Bearer em cache, jobs em filas Redis/Horizon ' +
-        'com retentativas e agendamentos que importam contratos, titulares, dependentes, faturas, mensalidades e ' +
-        'coparticipações. Expus APIs REST protegidas por OAuth2 (Passport) e documentadas em Swagger, consumidas ' +
-        'pelos portais. Criei o módulo de Não Similaridade com login LDAP/AD, consulta de NCM no Siscomex e uma API ' +
-        'de verificação de certificados SSL.',
+        'Integrei a API REST da Unimed ao SGI (Laravel 9/PHP 8) para abastecer a plataforma SoftExpert com contratos, ' +
+        'titulares, dependentes, faturas, mensalidades e coparticipações, usando token Bearer em cache, jobs em filas ' +
+        'Redis/Horizon e agendamentos. Expus APIs REST com OAuth2 (Passport) documentadas em Swagger, consumidas pelos ' +
+        'portais, e criei o módulo de Não Similaridade com login LDAP/AD, consulta de NCM no Siscomex e uma API de ' +
+        'verificação de certificados SSL.',
       stack: ['Laravel 9', 'PHP 8', 'Livewire', 'MySQL', 'Redis'],
-      integrations: ['Unimed', 'APIs REST', 'OAuth2 (Passport)', 'Swagger', 'LDAP / AD', 'Siscomex', 'TOTVS Protheus', 'TOTVS RM'],
+      integrations: ['Unimed', 'SoftExpert', 'APIs REST', 'OAuth2 (Passport)', 'Swagger', 'LDAP / AD', 'Siscomex', 'TOTVS Protheus', 'TOTVS RM'],
       infra: ['Horizon', 'Filas e jobs', 'Azure App Service', 'Linux', 'Kudu'],
     },
     {
