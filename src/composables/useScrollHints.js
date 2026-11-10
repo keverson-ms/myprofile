@@ -14,8 +14,7 @@ export function useScrollHints(target) {
   const scrollStep = (direction) => {
     const el = target.value
     if (!el) return
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    el.scrollBy({ top: direction * el.clientHeight * 0.6, behavior: reduce ? 'auto' : 'smooth' })
+    el.scrollBy({ top: direction * el.clientHeight * 0.6, behavior: 'smooth' })
   }
 
   let observer

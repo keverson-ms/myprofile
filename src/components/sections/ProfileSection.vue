@@ -41,8 +41,7 @@ const featuredMatches = computed(
 const highlight = (tag) => (selectedWord.value ? tagMatches(tag, selectedWord.value) : false)
 
 const scrollTo = (el) => {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  el?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' })
+  el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
 }
 
 const select = async (name) => {
@@ -137,7 +136,7 @@ const select = async (name) => {
             class="commits-note inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-gold/5 px-4 py-1.5 text-xs font-medium text-fg/80"
           >
             <span class="relative flex size-2.5" aria-hidden="true">
-              <span class="absolute inline-flex size-full rounded-full bg-gold opacity-75 motion-safe:animate-ping" />
+              <span class="absolute inline-flex size-full rounded-full bg-gold opacity-75 animate-ping" />
               <span class="relative inline-flex size-2.5 rounded-full bg-gold" />
             </span>
             Commits próprios nos últimos 3 anos, sem contar merges.
@@ -160,8 +159,5 @@ const select = async (name) => {
   50% {
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-gold) 18%, transparent);
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  .commits-note { animation: none; }
 }
 </style>

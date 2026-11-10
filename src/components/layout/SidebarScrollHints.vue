@@ -31,7 +31,7 @@ const hints = computed(() => [
       :title="hint.label"
       @click="emit('scroll', hint.dir)"
     >
-      <AppIcon :name="hint.icon" class="size-5" :class="{ 'motion-safe:animate-bounce': hint.dir === 1 }" />
+      <AppIcon :name="hint.icon" class="size-5" :class="{ 'animate-bounce': hint.dir === 1 }" />
     </button>
   </div>
 </template>

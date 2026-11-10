@@ -84,8 +84,4 @@ const stars = Array.from({ length: STAR_COUNT }, () => {
   100% { opacity: 0; translate: -320px 225px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .star { animation: none; }
-  .shooting-star { display: none; }
-}
 </style>

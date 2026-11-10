@@ -206,17 +206,4 @@ const stars = [
   0%, 60%, 100% { opacity: 0.2; }
   30% { opacity: 1; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .uc-rocket { animation-duration: 8s; }
-  .uc-smoke,
-  .uc-head { animation-duration: 8s; }
-  .uc-flame { animation: uc-flicker-soft 1.2s ease-in-out infinite alternate; }
-  .uc-star,
-  .uc-dot { animation: none; }
-}
-@keyframes uc-flicker-soft {
-  from { transform: scaleY(0.92); }
-  to { transform: scaleY(1.04); }
-}
 </style>

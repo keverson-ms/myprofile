@@ -139,8 +139,4 @@ const motion = (word, i) => {
   to { scale: 1.012 1.03; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cloud-word,
-  .cloud-shape { animation: none; }
-}
 </style>

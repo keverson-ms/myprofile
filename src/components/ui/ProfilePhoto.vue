@@ -37,9 +37,7 @@ const onPointerMove = (e) => {
 const reset = () => (tilt.value = { x: 0, y: 0 })
 
 onMounted(() => {
-  enabled =
-    window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  enabled = window.matchMedia('(hover: hover) and (pointer: fine)').matches
   if (!enabled) return
   window.addEventListener('pointermove', onPointerMove, { passive: true })
   document.documentElement.addEventListener('pointerleave', reset)

@@ -42,7 +42,4 @@ watch(done, (value) => value && emit('done'), { immediate: true })
 @keyframes blink {
   50% { opacity: 0; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .typed-cursor { display: none; }
-}
 </style>

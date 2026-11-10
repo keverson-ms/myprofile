@@ -31,11 +31,6 @@ export function useTypewriter(
   }
 
   onMounted(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      count.value = length
-      done.value = true
-      return
-    }
     timer = setTimeout(type, startDelay)
   })
   onBeforeUnmount(() => clearTimeout(timer))
